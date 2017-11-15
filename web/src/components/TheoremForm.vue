@@ -2,16 +2,13 @@
   <form @submit.prevent="onSubmit">
     <div class="form-group">
       <label for="exampleInputName">Your name</label>
-      <input type="text" class="form-control" id="exampleInputName" placeholder="Name">
+      <input type="text" class="form-control" id="exampleInputName"
+      placeholder="Name" v-model="name">
     </div>
     <div class="form-group">
       <label for="exampleInputTheorem">Theorem</label>
-      <input type="text" class="form-control" id="exampleInputTheorem" placeholder="Theorem">
-    </div>
-    <div class="checkbox">
-      <label>
-        <input type="checkbox"> Check me out
-      </label>
+      <input type="text" class="form-control" id="exampleInputTheorem"
+      placeholder="Theorem" v-model="theorem">
     </div>
     <button type="submit" class="btn btn-default">Save theorem</button>
   </form>
@@ -19,7 +16,11 @@
 
 <script>
   export default {
-    mounted () {
+    data () {
+      return {
+        name: '',
+        theorem: ''
+      }
     },
     methods: {
       onSubmit () {
@@ -27,6 +28,7 @@
           author: this.name,
           text: this.theorem
         })
+          .then(() => this.$emit('create'))
       }
     }
   }
