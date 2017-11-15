@@ -22,8 +22,8 @@ COPY nginx /etc/nginx
 
 WORKDIR /app
 VOLUME /data/db
-VOLUME /app/srv/src
-VOLUME /app/web/src
+VOLUME /app/srv/node_modules
+VOLUME /app/web/node_modules
 
 CMD ["/usr/bin/supervisord"]
 
