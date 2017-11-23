@@ -1,16 +1,16 @@
 <template>
   <form @submit.prevent="onSubmit">
     <div class="form-group">
-      <label for="exampleInputName">Your name</label>
+      <label for="exampleInputName">Author name</label>
       <input type="text" class="form-control" id="exampleInputName"
       placeholder="Name" v-model="name">
     </div>
     <div class="form-group">
-      <label for="exampleInputTheorem">Theorem</label>
-      <input type="text" class="form-control" id="exampleInputTheorem"
-      placeholder="Theorem" v-model="theorem">
+      <label for="exampleInputQuote">Quote</label>
+      <input type="text" class="form-control" id="exampleInputQuote"
+      placeholder="Quote" v-model="quote">
     </div>
-    <button type="submit" class="btn btn-default">Save theorem</button>
+    <button type="submit" class="btn btn-default">Save quote</button>
   </form>
 </template>
 
@@ -19,14 +19,14 @@
     data () {
       return {
         name: '',
-        theorem: ''
+        quote: ''
       }
     },
     methods: {
       onSubmit () {
-        this.$feathers.service('theorems').create({
+        this.$feathers.service('quotes').create({
           author: this.name,
-          text: this.theorem
+          text: this.quote
         })
           .then(() => this.$emit('create'))
       }

@@ -3,14 +3,14 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
         <div class="well">
-          <theorem-form @create="fetchTheorems"/>
+          <quote-form @create="fetchQuotes"/>
         </div>
 
         <div class="panel panel-default">
           <div class="panel-heading">
-            Existing Theorems
+            Existing Quotes
           </div>
-          <theorem-list :theorems="theorems"/>
+          <quote-list :quotes="quotes"/>
         </div>
       </div>
     </div>
@@ -18,27 +18,27 @@
 </template>
 
 <script>
-  import TheoremForm from './components/TheoremForm'
-  import TheoremList from './components/TheoremList'
+  import QuoteForm from './components/QuoteForm'
+  import QuoteList from './components/QuoteList'
 
   export default {
     data () {
       return {
-        theorems: []
+        quotes: []
       }
     },
-    components: { TheoremForm, TheoremList },
+    components: { QuoteForm, QuoteList },
     mounted () {
-      this.fetchTheorems()
+      this.fetchQuotes()
     },
     methods: {
-      fetchTheorems () {
-        this.$feathers.service('theorems').find()
+      fetchQuotes () {
+        this.$feathers.service('quotes').find()
           .then(result => {
-            this.theorems = result.data
+            this.quotes = result.data
           })
           .catch(() => {
-            console.log('An error occurred while retreiving theorems.')
+            console.log('An error occurred while retreiving quotes.')
           })
       }
     }

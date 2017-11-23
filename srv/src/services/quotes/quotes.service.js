@@ -1,7 +1,7 @@
-// Initializes the `theorems` service on path `/theorems`
+// Initializes the `quotes` service on path `/quotes`
 const createService = require('feathers-mongodb');
-const hooks = require('./theorems.hooks');
-const filters = require('./theorems.filters');
+const hooks = require('./quotes.hooks');
+const filters = require('./quotes.filters');
 
 module.exports = function () {
   const app = this;
@@ -10,13 +10,13 @@ module.exports = function () {
   const options = { paginate };
 
   // Initialize our service with any options it requires
-  app.use('/theorems', createService(options));
+  app.use('/quotes', createService(options));
 
   // Get our initialized service so that we can register hooks and filters
-  const service = app.service('theorems');
+  const service = app.service('quotes');
 
   mongoClient.then(db => {
-    service.Model = db.collection('theorems');
+    service.Model = db.collection('quotes');
   });
 
   service.hooks(hooks);

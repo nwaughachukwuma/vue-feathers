@@ -39,6 +39,7 @@
     "feathers-mongodb": "^2.9.1",
     "feathers-rest": "^1.8.1",
     "helmet": "^3.9.0",
+    "lodash": "^4.17.4",
     "mongodb": "^2.2.33",
     "nodemon": "^1.12.1",
     "serve-favicon": "^2.4.5",

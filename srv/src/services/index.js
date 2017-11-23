@@ -1,5 +1,7 @@
-const theorems = require('./theorems/theorems.service.js');
+const quotes = require('./quotes/quotes.service.js');
+const archivedQuotes = require('./archived-quotes/archived-quotes.service.js');
 module.exports = function () {
   const app = this; // eslint-disable-line no-unused-vars
-  app.configure(theorems);
+  app.configure(quotes);
+  app.configure(archivedQuotes);
 };
