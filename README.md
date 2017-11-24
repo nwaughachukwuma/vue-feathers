@@ -27,6 +27,7 @@ The application comes with a few npm libraries pre-installed, which you can see 
 * Vue.js
 * lodash
 * font-awesome (icons)
+* scss (may be used to style components)
 
 **Backend**:
 
@@ -104,8 +105,8 @@ The client has decided they want to introduce a few formatting rules which the q
 
 **Rule 2:** The quote has to contain at least eight unique letters. The case of the letters is irrelevant, so that "A" and "a" are considered the same letter. Any special character (including modified letters such as à, ö, Ç, ...) should not be considered in this rule.
 
-**Rule 3:** The client wants to prevent plagiarism of existing quotes and has come up with a simple test to determine such cases. They consider a quote as "original" only if the following condition is met:
-The new quote contains at least 2 words that have not been used together in a single previous quote. Two words with the same letters but different case are considered to be equivalent (e.g. apple equals Apple equals APPLE).
+**Rule 3:** The client wants to prevent plagiarism of existing quotes and has come up with a simple test to determine such cases. They consider a quote as plagiarized when the following condition is met:
+The new quote contains 3 or more consecutive words which have been used in the same order in a previous quote. Two words with the same letters but different case are considered to be equivalent (e.g. apple equals Apple equals APPLE).
 
 
 ### Part IV: Alerting the User
@@ -121,5 +122,13 @@ Simply checking each document in the `archived-quotes` collection would be strai
 
 ### Part VI: Bug Fixes
 
-> Introduce some kind of bug in a separate part of the application.
+In the `web` application, there is an unused component at `src/components/LoopyButton.vue`. It was meant to appear somewhere inside the form, but was removed due to faulty behaviour. The planned behaviour was that this button should display a number which is incremented by 1 each time it is clicked. Find the bug in the component and fix it.
+
+
+## Copyright
+
+Copyright (C) e-bot7 GmbH - All Rights Reserved. Unauthorized copying and/or distribution of any file in this repository, via any medium is strictly prohibited.
+
+
+Bugs in Promises
 
