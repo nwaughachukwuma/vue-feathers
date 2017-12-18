@@ -31,5 +31,6 @@ COPY . /app
 RUN useradd -ms /bin/bash user
 RUN echo 'user:password' | chpasswd
 RUN chown user:user -R srv/src web/src
+RUN chmod go+w -R srv/src web/src
 
 ENV BABEL_DISABLE_CACHE=1
