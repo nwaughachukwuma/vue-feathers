@@ -1,7 +1,7 @@
 FROM node:8.7
 
 RUN apt-get update \
-    && apt-get install -y nginx mongodb supervisor openssh-server
+    && apt-get install -y nginx mongodb supervisor openssh-server markdown
 
 RUN mkdir /var/run/sshd
 
@@ -18,7 +18,7 @@ RUN yarn
 COPY nginx /etc/nginx
 
 WORKDIR /app
-RUN mkdir -p /data/db
+RUN mkdir -p /data/db /app/readme
 COPY init-db.sh init-db.js fermat.txt /app/
 RUN ./init-db.sh
 
@@ -27,6 +27,9 @@ CMD ["/bin/sh", "-c", "supervisord -c /app/supervisord.conf"]
 EXPOSE 80 22
 
 COPY . /app
+
+RUN markdown README.md > /app/readme/index.html
+COPY images /app/readme/images
 
 RUN useradd -ms /bin/bash user
 

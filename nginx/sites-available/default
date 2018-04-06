@@ -53,6 +53,10 @@ server {
       proxy_buffering off;
   }
 
+  location /readme {
+      root /app;
+  }
+
   location / {
       proxy_pass http://localhost:8080;
       proxy_http_version 1.1;
