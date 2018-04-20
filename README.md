@@ -114,7 +114,11 @@ In the `web` application, there is an unused component at `src/components/LoopyB
 
 ## Submission
 
-Very Important! In order for us to evaluate your submission please make sure all your changes are committed and these commits have been pushed to your git repository. Once everything is pushed you can run `make clean` to free up all resources used by the docker container. We will review your result over the coming days and get back to you once we are finished :)
+**Very Important!** In order for us to evaluate your submission please make sure all your changes are committed and these commits have been pushed to your git repository. 
+```
+git push
+```
+Once everything is pushed you can run `make clean` to free up all resources used by the docker container. We will review your result over the coming days and get back to you once we are finished :)
 
 ## Copyright
 
