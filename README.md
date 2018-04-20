@@ -2,18 +2,6 @@
 
 ## Getting Started
 
-### Tools
-
-You will need the following tools to complete this task.
-
-1. An ssh and/or sftp client
-
-  You should have received ssh credentials (user + password or ssh private key) during the preparation. With these, you can access and edit existing files and create new files via ssh or sftp.
-
-2. A modern browser, preferably Chrome/Chromium or Firefox
-
-  Multi-browser support is not part of this task and the base application has not been tested in any browser except Chromium. Judgement of the result will also be done in Chromium, therefore it is strongly recommended to use that browser for development. (Google Chrome should be fine, too.)
-
 ### Vue.js and Feathers
 
 You will need a basic understanding of the [Vue.js web framework](https://vuejs.org/) and the [Feathers API layer](https://feathersjs.com/) in order to complete this task.
@@ -39,13 +27,13 @@ Note: Your code should not rely on any libraries besides the ones already instal
 
 ## The Basics
 
-As part of the preparation you will receive a public URI that you can open in your browser. It will look something like [http://3f8he.rsb.e-bot7.de/](http://3f8he.rsb.e-bot7.de/).
+As you are reading this you have already successfully run the Makefile to start the application. You can visit the app at http://localhost:8380/ 
 
 Navigate your browser to this page and you should see a simple web form:
 
 ![Basic web form](images/basic-web-form.png)
 
-This page will loads the frontend application code. In most cases, it will automatically reload whenever source files are changed. In the rare exceptions where the auto-reload does not trigger, you will have to manually refresh the page to see your changes.
+This page will load the frontend application code. In most cases, it will automatically reload whenever source files are changed. In the rare exceptions where the auto-reload does not trigger, you will have to manually refresh the page to see your changes.
 
 You should be able to enter some data and submit the form, which will send the data to the backend, where it is saved to the database. The saved data will then be displayed in the list below the form:
 
@@ -124,11 +112,11 @@ Simply checking each document in the `archived-quotes` collection would be strai
 
 In the `web` application, there is an unused component at `src/components/LoopyButton.vue`. It was meant to appear somewhere inside the form, but was removed due to faulty behaviour. The planned behaviour was that this button should display a number which is incremented by 1 each time it is clicked. Find the bug in the component and fix it.
 
+## Submission
+
+Very Important! In order for us to evaluate your submission please make sure all your changes are committed and these commits have been pushed to your git repository. Once everything is pushed you can run `make clean` to free up all resources used by the docker container. We will review your result over the coming days and get back to you once we are finished :)
 
 ## Copyright
 
 Copyright (C) e-bot7 GmbH - All Rights Reserved. Unauthorized copying and/or distribution of any file in this repository, via any medium is strictly prohibited.
-
-
-Bugs in Promises
 
