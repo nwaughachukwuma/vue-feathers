@@ -13,8 +13,8 @@ build:
 run:
 	docker run -d --restart=always --name=ebot7-recruit \
 		-p 8380:80 \
-		-v $(PWD)/srv/src:/app/srv/src \
-		-v $(PWD)/web/src:/app/web/src \
+		-v $(CURDIR)/srv/src:/app/srv/src \
+		-v $(CURDIR)/web/src:/app/web/src \
 		ebot7-recruit
 
 clean:
