@@ -67,7 +67,10 @@ The MongoDB instance is used to persist data from the application. For the task 
 
 ## Task description
 
-To get an understanding of the task at hand, picture the following scenario. An application has been developed for a client which enables users to post quotes to a central database. You have recently taken over this project and have received a couple of new requirements by the client.
+**Important!**
+You do not have to do all of the following tasks. There are separate tests for front end, back end, and full stack developers. Only do the tasks assigned to the position you applied for. For example, "Part III: Deleting Quotes [Full stack, Front end]" should be completed by full stack and front end applicants, but not back end applicants.
+
+To get an understanding of the tasks at hand, picture the following scenario. An application has been developed for a client which enables users to post quotes to a central database. You have recently taken over this project and have received a couple of new requirements by the client.
 
 
 ### Part I: Group Quotes by Author [Front end]
