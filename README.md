@@ -67,17 +67,41 @@ The MongoDB instance is used to persist data from the application. For the task 
 
 ## Task description
 
-To get an understanding of the task at hand, picture the following scenario. An application has been developed for a client which enables users to post quotes to a central database. You have recently taken over this project and have received a couple of new requirements by the client.
+**Important!**
+You do not have to do all of the following tasks. There are separate tests for front end, back end, and full stack developers. Only do the tasks assigned to the position you applied for. For example, "Part III: Deleting Quotes [Full stack, Front end]" should be completed by full stack and front end applicants, but not back end applicants.
+
+To get an understanding of the tasks at hand, picture the following scenario. An application has been developed for a client which enables users to post quotes to a central database. You have recently taken over this project and have received a couple of new requirements by the client.
 
 
-### Part I: Deleting Quotes
+### Part I: Group Quotes by Author [Front end]
+
+Change the homepage layout so that quotes are grouped by author. Each group of quotes should have the author's name as a header. Consider how to efficiently lay out the page for maximum readability.
+
+### Part I: Make Quotes Editable [Front end]
+
+Replace the Quote and QuoteForm component with a single component called EditableQuote. EditableQuote should:
+
+  * Have two views, a display and edit view. The display view should only show the quote. Clicking the component should cause the quote to disappear, and the author and quote to appear in text inputs. Only one quote should be in edit view at a time.
+  * Automatically save changes to the server without requiring the user to click a button.
+  * Indicate when changes are being saved, on both display and edit view.
+
+### Part III: Deleting Quotes [Full stack, Front end]
 
 In the current state of the application, quotes may be added to the list but the user interface does not allow the user to delete one. The client wants their users to be able to delete any quote. They don't offer a detailed description of this "Deletion" feature, but expect an intuitive and simple process for the user.
 
 After deletion of an item it should disappear from the list on the page.
 
+### Part IV: Add a Button For Adding a New Quote [Front end]
 
-### Part II: Improving the User Experience
+Add a button for adding a new quote. Clicking this button should display an EditableQuote with no pre-filled input.
+
+### Part V: Search Bar (Bonus) [Front end]
+
+**Only do this task if you are satisfied with the completeness of all other tasks**
+
+Create a search bar component which allows the user to search both authors and quotes. The filtered quotes should still be grouped by author. Highlight the matching text where it appears in either the quote or author. The search bar should check the server, not just the local quotes.
+
+### Part VI: Improving the User Experience [Full stack]
 
 The client is not satisfied with the user experience of the current form. They propose a few improvements:
 
@@ -85,7 +109,7 @@ The client is not satisfied with the user experience of the current form. They p
 2. In addition to showing a load icon, all form inputs and buttons should be disabled until all requests are finished.
 3. After successfully saving a quote, the form input fields should be cleared.
 
-### Part III: Validating Quotes on the Server
+### Part VII: Validating Quotes on the Server [Full stack, Back end]
 
 The client has decided they want to introduce a few formatting rules which the quotes have to follow in order to be accepted. Any request by a client that would result in an entry that does not adhere to these rules must be rejected by the server.
 
@@ -97,18 +121,18 @@ The client has decided they want to introduce a few formatting rules which the q
 The new quote contains 3 or more consecutive words which have been used in the same order in a previous quote. Two words with the same letters but different case are considered to be equivalent (e.g. apple equals Apple equals APPLE).
 
 
-### Part IV: Alerting the User
+### Part VIII: Alerting the User [Full stack]
 
 In case one of the rules from Part III is violated by a submission, the user should be informed about that violation, e.g. by triggering a browser alert with a message "This quote violates rule 1."
 
 
-### Part V: Improving Database Performance
+### Part IX: Improving Database Performance [Full stack, Back end]
 
 In the database there is another collection that has not been used in the application so far, named `archived-quotes`. It consists of a large archive of quotes which were gathered from different sources. The client does not want those quotes to be displayed to the user, but the archive should be checked whenever a new quote is added in order to find possible plagiarisms (see rule 3 of Part III).
 
 Simply checking each document in the `archived-quotes` collection would be straightforward to implement, but due to the size of the collection such a test would take a long time to complete, which would result in the entire application slowing down. Implement a solution that allows these queries to run in a much shorter time.
 
-### Part VI: Bug Fixes
+### Part X: Bug Fixes [Full stack, Front end]
 
 In the `web` application, there is an unused component at `src/components/LoopyButton.vue`. It was meant to appear somewhere inside the form, but was removed due to faulty behaviour. The planned behaviour was that this button should display a number which is incremented by 1 each time it is clicked. Find the bug in the component and fix it.
 
