@@ -77,23 +77,26 @@ To get an understanding of the tasks at hand, picture the following scenario. An
 
 Change the homepage layout so that quotes are grouped by author. Each group of quotes should have the author's name as a header. Consider how to efficiently lay out the page for maximum readability.
 
-### Part II: Make Quotes Editable [Front end]
+### Part II: Merge Quote and QuoteForm Into Single Component[Front end]
 
-Replace the Quote and QuoteForm component with a single component called EditableQuote. EditableQuote should:
+Replace the Quote and QuoteForm component with a single component called EditableQuote. 
+The Quotes in the QuoteList should be replaced by EditableQuotes. The QuoteForm component should no longer appear on the page. Part III explains how new quotes should be added.
 
-  * Have two views, a display and edit view. The display view should only show the quote. Clicking the component should cause the quote to disappear, and the author and quote to appear in text inputs. Only one quote should be in edit view at a time.
-  * Automatically save changes to the server without requiring the user to click a button.
-  * Indicate when changes are being saved, on both display and edit view.
+EditableQuote should:
 
-### Part III: Deleting Quotes [Full stack, Front end]
+  * Have two modes, a display and edit mode. The display mode should only show the quote, not the author. Clicking the component should cause the author and quote to appear in text inputs. Only one quote should be in edit mode at a time. Clicking on a quote should make all other quotes revert to display mode.
+  * Automatically save changes to the server as the user types.
+  * Indicate when changes are being saved, on both display and edit mode.
+
+### Part III: Add a Button For Adding a New Quote [Front end]
+
+Add a button for adding a new quote. Clicking this button should display a modal with an empty EditableQuote.
+
+### Part IV: Deleting Quotes [Full stack, Front end]
 
 In the current state of the application, quotes may be added to the list but the user interface does not allow the user to delete one. The client wants their users to be able to delete any quote. They don't offer a detailed description of this "Deletion" feature, but expect an intuitive and simple process for the user.
 
 After deletion of an item it should disappear from the list on the page.
-
-### Part IV: Add a Button For Adding a New Quote [Front end]
-
-Add a button for adding a new quote. Clicking this button should display an EditableQuote with no pre-filled input.
 
 ### Part V: Search Bar (Bonus) [Front end]
 
