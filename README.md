@@ -64,6 +64,17 @@ Similiar to the web app, the server is automatically restarted as soon as a file
 
 The MongoDB instance is used to persist data from the application. For the task below, you may freely add fields, collections, and indices as you seem fit.
 
+You can access the mongo shell with this command:
+```
+docker exec -it ebot7-recruit mongo app
+```
+
+### Logs
+
+You can view output of Node.js with this command:
+```
+docker logs -f ebot7-recruit
+```
 
 ## Task description
 
