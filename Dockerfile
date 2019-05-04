@@ -1,4 +1,4 @@
-FROM node:8.7
+FROM node
 
 RUN apt-get update \
     && apt-get install -y nginx mongodb supervisor openssh-server markdown
