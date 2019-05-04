@@ -1,7 +1,7 @@
 var coll = db.getCollection('archived-quotes');
 var words = cat('/app/fermat.txt').split(' ');
 var pos = 0;
-for (var i = 0; i < 1000*1000; i++) {
+for (var i = 0; i < 1000*10; i++) {
   var text = []
   var idx = (Math.random() + '')
     .replace(/^0./, '').split('').map(function(n){return parseInt(n, 10)})
