@@ -79,7 +79,7 @@ docker logs -f ebot7-recruit
 ## Task description
 
 **Important!**
-You do not have to do all of the following tasks. There are separate tests for front end, back end, and full stack developers. Only do the tasks assigned to the position you applied for. For example, "Part III: Deleting Quotes [Full stack, Front end]" should be completed by full stack and front end applicants, but not back end applicants.
+You do not have to do all of the following tasks. There are separate tests for front end, back end, and full stack developers. Only do the tasks assigned to the position you applied for. For example, "Part IV: Deleting Quotes [Full stack, Front end]" should be completed by full stack and front end applicants, but not back end applicants.
 
 To get an understanding of the tasks at hand, picture the following scenario. An application has been developed for a client which enables users to post quotes to a central database. You have recently taken over this project and have received a couple of new requirements by the client.
 
@@ -137,12 +137,12 @@ The new quote contains 3 or more consecutive words which have been used in the s
 
 ### Part VIII: Alerting the User [Full stack]
 
-In case one of the rules from Part III is violated by a submission, the user should be informed about that violation, e.g. by triggering a browser alert with a message "This quote violates rule 1."
+In case one of the rules from Part VII is violated by a submission, the user should be informed about that violation, e.g. by triggering a browser alert with a message "This quote violates rule 1."
 
 
 ### Part IX: Improving Database Performance [Full stack, Back end]
 
-In the database there is another collection that has not been used in the application so far, named `archived-quotes`. It consists of a large archive of quotes which were gathered from different sources. The client does not want those quotes to be displayed to the user, but the archive should be checked whenever a new quote is added in order to find possible plagiarisms (see rule 3 of Part III).
+In the database there is another collection that has not been used in the application so far, named `archived-quotes`. It consists of a large archive of quotes which were gathered from different sources. The client does not want those quotes to be displayed to the user, but the archive should be checked whenever a new quote is added in order to find possible plagiarisms (see rule 3 of Part VII).
 
 Simply checking each document in the `archived-quotes` collection would be straightforward to implement, but due to the size of the collection such a test would take a long time to complete, which would result in the entire application slowing down. Implement a solution that allows these queries to run in a much shorter time.
 
