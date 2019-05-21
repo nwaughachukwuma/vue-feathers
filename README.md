@@ -88,10 +88,10 @@ To get an understanding of the tasks at hand, picture the following scenario. An
 
 Change the homepage layout so that quotes are grouped by author. Each group of quotes should have the author's name as a header. Consider how to efficiently lay out the page for maximum readability.
 
-### Part II: Merge Quote and QuoteForm Into Single Component[Front end]
+### Part II: Merge QuoteItem and QuoteForm Into Single Component[Front end]
 
-Replace the Quote and QuoteForm component with a single component called EditableQuote. 
-The Quotes in the QuoteList should be replaced by EditableQuotes. The QuoteForm component should no longer appear on the page. Part III explains how new quotes should be added.
+Replace the QuoteItem and QuoteForm component with a single component called EditableQuote. 
+The QuoteItems in the QuoteList should be replaced by EditableQuotes. The QuoteForm component should no longer appear on the page. Part III explains how new quotes should be added.
 
 EditableQuote should:
 
