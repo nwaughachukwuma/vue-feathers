@@ -2,7 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <div class="well">
+
+        <quote-modal />
+
+        <div class="well" v-show="quoteModal">
           <quote-form @create="fetchQuotes"/>
         </div>
 
@@ -27,17 +30,17 @@
   import {groupBy} from 'lodash'
 
   import QuoteForm from './components/QuoteForm'
-  // import QuoteList from './components/QuoteList'
   import QuoteGroup from './components/QuoteGroup'
+  import QuoteModal from './components/EdidableQuoteModal'
 
   export default {
     data () {
       return {
         groupedQuotes: {},
-        quotes: []
+        quoteModal: false
       }
     },
-    components: { QuoteForm, QuoteGroup },
+    components: { QuoteForm, QuoteGroup, QuoteModal },
     mounted () {
       this.fetchQuotes()
     },
@@ -48,8 +51,6 @@
             // get the grouped quotes
             const groupedEntry = groupBy(result.data, quote => quote.author)
             this.groupedQuotes = groupedEntry;
-            // console.log(this.groupedQuotes)
-            this.quotes = result.data
           })
           .catch(() => {
             console.log('An error occurred while retreiving quotes.')
@@ -62,5 +63,8 @@
 <style lang="scss" scoped>
 .container {
   margin-top: 2em;
+}
+.addQuote {
+  margin-bottom: 1em;
 }
 </style>
