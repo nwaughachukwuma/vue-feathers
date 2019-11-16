@@ -1,12 +1,12 @@
 <template>
   <li class="list-group-item">
     <edit-quote 
-         v-if="displayMode==='edit'" 
+        v-if="displayMode==='edit'" 
         :authorQuote="authorQuote" 
         :disableAuthorField="disableAuthorField" 
-        v-on:toggleMode="toggleMode"
+        @toggleMode="toggleMode"
     />
-    <display-quote :authorQuote="authorQuote" v-on:toggleMode="toggleMode" v-else />
+    <display-quote :authorQuote="authorQuote" @toggleMode="toggleMode" v-else />
   </li>
 </template>
 
@@ -19,7 +19,8 @@
     components: { DisplayQuote, EditQuote },
     props: {
       authorQuote: { type: Object, default: () => ({text: ''}) },
-      mode: { type: String, default: 'display'} // ['display', 'edit']
+      mode: { type: String, default: 'display'}, // ['display', 'edit']
+      activeQuoteId: { type: String, default: ''}
     },
     data () {
       return {
@@ -28,7 +29,8 @@
       }
     },
     methods: {
-      toggleMode(mode) {
+      toggleMode({mode, itemId}) {
+        this.$emit('isClicked', {mode, itemId})
         this.displayMode = mode;
         if (mode === 'edit') {
             this.disableAuthorField = true
@@ -47,6 +49,14 @@
                 this.quote = val.text;
             },
             immediate: true
+        },
+        activeQuoteId: {
+            handler(val) {
+                if (this.authorQuote._id !== val) {
+                    this.displayMode = 'display';
+                }
+            },
+            immediate: false
         }
     }
   }

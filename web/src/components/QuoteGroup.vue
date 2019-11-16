@@ -1,7 +1,12 @@
 <template>
   <ul class="list-group" v-if="!isEmpty(groupedQuotes)">
     <div v-for="(quotes, author) in groupedQuotes" :key="quotes[0]._id">
-        <quote-group-view :quotes="quotes" :author="author" />
+        <quote-group-view 
+            :quotes="quotes" 
+            :author="author" 
+            @onQuoteClicked="quoteClicked" 
+            :activeQuoteId="activeQuoteId"
+        />
     </div>
   </ul>
   <div class="panel-body" v-else>
@@ -18,8 +23,16 @@
     props: {
       groupedQuotes: { type: Object, default: {}}
     },
+    data() {
+        return {
+            activeQuoteId: null
+        }
+    },
     methods: {
-      isEmpty
+      isEmpty,
+      quoteClicked({mode, itemId}) {
+        this.activeQuoteId = itemId
+      }
     }
   }
 </script>

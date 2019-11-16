@@ -1,6 +1,12 @@
 <template>
   <ul class="list-group" v-if="quotes.length">
-    <editable-quote v-for="quote in quotes" :key="quote._id" :authorQuote="quote"/>
+    <editable-quote 
+      v-for="quote in quotes" 
+      :key="quote._id" 
+      :authorQuote="quote"
+      @isClicked="itemClicked"
+      :activeQuoteId="activeQuoteId"
+    />
   </ul>
   <div class="panel-body" v-else>
     <p>No quotes found.</p>
@@ -13,8 +19,14 @@
   export default {
     components: { EditableQuote },
     props: {
-      quotes: { type: Array, default: [] }
-    }
+      quotes: { type: Array, default: [] },
+      activeQuoteId: { type: String, default: ''}
+    },
+    methods: {
+      itemClicked({mode, itemId}) {
+        this.$emit('quoteClicked', {mode, itemId})
+      }
+    },
   }
 </script>
 

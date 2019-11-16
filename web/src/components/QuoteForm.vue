@@ -54,7 +54,7 @@
           .then(() => this.$emit('create'))
       },
       toggleMode() {
-        this.$emit('toggleMode', 'display')
+        this.$emit('toggleMode', {mode: 'display', itemId: this.authorQuote._id})
       }
     },
     watch: {

@@ -17,12 +17,6 @@
 </template>
 
 <script>
-
-  /**
-  |--------------------------------------------------
-  | Task 1: Group quotes by authors
-  |--------------------------------------------------
-  */
   import {groupBy} from 'lodash'
 
   import QuoteGroup from './components/QuoteGroup'
@@ -31,8 +25,7 @@
   export default {
     data () {
       return {
-        groupedQuotes: {},
-        quoteModal: true
+        groupedQuotes: {}
       }
     },
     components: { QuoteGroup, QuoteModal },

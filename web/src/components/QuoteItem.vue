@@ -14,7 +14,7 @@
     },
     methods: {
       toggleMode() {
-        this.$emit('toggleMode', 'edit')
+        this.$emit('toggleMode', {mode: 'edit', itemId: this.authorQuote._id})
       }
     },
   }
