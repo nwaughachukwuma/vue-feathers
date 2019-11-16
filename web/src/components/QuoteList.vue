@@ -1,6 +1,6 @@
 <template>
   <ul class="list-group" v-if="quotes.length">
-    <quote-item v-for="quote in quotes" :quote="quote"/>
+    <quote-item v-for="quote in quotes" :key="quote._id" :quote="quote"/>
   </ul>
   <div class="panel-body" v-else>
     <p>No quotes found.</p>

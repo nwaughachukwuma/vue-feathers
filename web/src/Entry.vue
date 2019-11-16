@@ -10,7 +10,7 @@
           <div class="panel-heading">
             Existing Quotes
           </div>
-          <quote-list :quotes="quotes"/>
+          <quote-group :groupedQuotes="groupedQuotes" />
         </div>
       </div>
     </div>
@@ -18,16 +18,26 @@
 </template>
 
 <script>
+
+  /**
+  |--------------------------------------------------
+  | Task 1: Group quotes by authors
+  |--------------------------------------------------
+  */
+  import {groupBy} from 'lodash'
+
   import QuoteForm from './components/QuoteForm'
-  import QuoteList from './components/QuoteList'
+  // import QuoteList from './components/QuoteList'
+  import QuoteGroup from './components/QuoteGroup'
 
   export default {
     data () {
       return {
+        groupedQuotes: {},
         quotes: []
       }
     },
-    components: { QuoteForm, QuoteList },
+    components: { QuoteForm, QuoteGroup },
     mounted () {
       this.fetchQuotes()
     },
@@ -35,6 +45,10 @@
       fetchQuotes () {
         this.$feathers.service('quotes').find()
           .then(result => {
+            // get the grouped quotes
+            const groupedEntry = groupBy(result.data, quote => quote.author)
+            this.groupedQuotes = groupedEntry;
+            // console.log(this.groupedQuotes)
             this.quotes = result.data
           })
           .catch(() => {

@@ -1,10 +1,9 @@
 <template>
   <li class="list-group-item">
-    <p>{{ quote.text }}</p>
-    <small class="text-muted">
-      <i class="fa fa-user"></i>
-      Author: {{ quote.author }}
-    </small>
+    <p>
+      <i class="fa fa-quote-left"></i>
+      {{ quote.text }}
+    </p>
   </li>
 </template>
 
