@@ -4,6 +4,7 @@
         <i class="fa fa-quote-left"></i>
         {{ authorQuote.text }}
     </p>
+    <small class="text-muted" v-if="authorQuote.edited"> - updated</small>
   </div>
 </template>
 

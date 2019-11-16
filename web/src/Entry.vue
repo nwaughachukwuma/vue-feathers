@@ -9,7 +9,11 @@
           <div class="panel-heading">
             Existing Quotes
           </div>
-          <quote-group :groupedQuotes="groupedQuotes" />
+          <quote-group 
+            :groupedQuotes="groupedQuotes" 
+            @created="fetchQuotes"
+            @updated="fetchQuotes"
+          />
         </div>
       </div>
     </div>
