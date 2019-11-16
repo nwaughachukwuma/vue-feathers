@@ -15,8 +15,8 @@ import QuoteList from './QuoteList'
 export default {
   components: { QuoteList },
   props: {
-    quotes: { type: Array, required: true, default: [] },
-    author: { type: String, required: true, default: 'John Smith'}
+    quotes: { type: Array, default: [] },
+    author: { type: String, default: 'John Smith'}
   }
 };
 </script>

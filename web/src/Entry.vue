@@ -5,10 +5,6 @@
 
         <quote-modal />
 
-        <div class="well" v-show="quoteModal">
-          <quote-form @create="fetchQuotes"/>
-        </div>
-
         <div class="panel panel-default">
           <div class="panel-heading">
             Existing Quotes
@@ -29,7 +25,6 @@
   */
   import {groupBy} from 'lodash'
 
-  import QuoteForm from './components/QuoteForm'
   import QuoteGroup from './components/QuoteGroup'
   import QuoteModal from './components/EdidableQuoteModal'
 
@@ -37,10 +32,10 @@
     data () {
       return {
         groupedQuotes: {},
-        quoteModal: false
+        quoteModal: true
       }
     },
-    components: { QuoteForm, QuoteGroup, QuoteModal },
+    components: { QuoteGroup, QuoteModal },
     mounted () {
       this.fetchQuotes()
     },
@@ -63,8 +58,5 @@
 <style lang="scss" scoped>
 .container {
   margin-top: 2em;
-}
-.addQuote {
-  margin-bottom: 1em;
 }
 </style>

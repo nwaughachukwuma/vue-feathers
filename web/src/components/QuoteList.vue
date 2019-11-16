@@ -1,6 +1,6 @@
 <template>
   <ul class="list-group" v-if="quotes.length">
-    <quote-item v-for="quote in quotes" :key="quote._id" :quote="quote"/>
+    <editable-quote v-for="quote in quotes" :key="quote._id" :authorQuote="quote"/>
   </ul>
   <div class="panel-body" v-else>
     <p>No quotes found.</p>
@@ -8,10 +8,10 @@
 </template>
 
 <script>
-  import QuoteItem from './QuoteItem'
+  import EditableQuote from './EditableQuote'
 
   export default {
-    components: { QuoteItem },
+    components: { EditableQuote },
     props: {
       quotes: { type: Array, default: [] }
     }
