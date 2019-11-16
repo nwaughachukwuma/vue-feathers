@@ -1,17 +1,22 @@
 <template>
-  <li class="list-group-item">
-    <p>
-      <i class="fa fa-quote-left"></i>
-      {{ quote.text }}
+  <div @click="toggleMode">
+    <p >
+        <i class="fa fa-quote-left"></i>
+        {{ authorQuote.text }}
     </p>
-  </li>
+  </div>
 </template>
 
 <script>
   export default {
     props: {
-      quote: { type: Object, required: true }
-    }
+      authorQuote: { type: Object, required: true }
+    },
+    methods: {
+      toggleMode() {
+        this.$emit('toggleMode', 'edit')
+      }
+    },
   }
 </script>
 
