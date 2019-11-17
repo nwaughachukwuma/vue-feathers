@@ -1,14 +1,5 @@
 <template>
   <ul class="panel-body list-group" v-if="!isEmpty(groupedQuotes)">
-    <span class="list-group-item">
-      <input 
-        class="form-control" 
-        type="text" 
-        placeholder="Search" 
-        aria-label="Search"
-        @input="searchItems"
-      >
-    </span>
     <div v-for="(quotes, author) in groupedQuotes" :key="quotes[0]._id">
         <quote-group-view 
             :quotes="quotes" 
