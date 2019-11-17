@@ -5,7 +5,9 @@
     </button>
     <p>
       <i class="fa fa-quote-left"></i>
-      {{ authorQuote.text }}
+      <label v-html="$options.filters.highlight(authorQuote.text, activeQuery)">
+        {{ authorQuote.text }}
+      </label>
     </p>
     <small class="text-muted" v-if="authorQuote.edited"> - updated</small>
   </div>
@@ -14,7 +16,8 @@
 <script>
   export default {
     props: {
-      authorQuote: { type: Object, required: true }
+      authorQuote: { type: Object, required: true },
+      activeQuery: { type: String, default: ''}
     },
     methods: {
       toggleMode() {

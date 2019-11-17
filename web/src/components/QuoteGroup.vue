@@ -8,6 +8,7 @@
             @updated="$emit('updated')"
             @removed="$emit('removed')"
             :activeQuoteId="activeQuoteId"
+            :activeQuery="activeQuery"
         />
     </div>
   </ul>
@@ -21,7 +22,8 @@
   export default {
     components: { QuoteGroupView },
     props: {
-      groupedQuotes: { type: Object, default: {}}
+      groupedQuotes: { type: Object, default: {}},
+      activeQuery: { type: String, default: '' }
     },
     data() {
         return {

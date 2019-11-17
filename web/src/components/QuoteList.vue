@@ -8,6 +8,7 @@
       @updated="$emit('updated')"
       @removed="$emit('removed')"
       :activeQuoteId="activeQuoteId"
+      :activeQuery="activeQuery"
     />
   </ul>
   <div class="panel-body" v-else>
@@ -23,7 +24,8 @@
     components: { EditableQuote },
     props: {
       quotes: { type: Array, default: [] },
-      activeQuoteId: { type: String, default: ''}
+      activeQuoteId: { type: String, default: ''},
+      activeQuery: { type: String, default: ''}
     },
     methods: {
       itemClicked({mode, itemId}) {

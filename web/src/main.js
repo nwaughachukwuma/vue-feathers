@@ -9,6 +9,14 @@ import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'babel-polyfill'
 
+// highlight filter
+Vue.filter('highlight', function(word, query){
+  var check = new RegExp(query, "ig");
+  return word.toString().replace(check, function(matchedText, a, b){
+      return ('<span class=\'text-danger highlight\'>' + matchedText + '</span>');
+  });
+});
+
 Vue.use(Vuex)
 Vue.use(VueFeathers, feathersClient())
 

@@ -17,6 +17,7 @@
               :groupedQuotes="groupedQuotes" 
               @updated="fetchQuotes"
               @removed="fetchQuotes"
+              :activeQuery="query"
             />
           </div>
         </div>
@@ -64,7 +65,10 @@
               throw new Error('No result found')
             }
             const filteredRes = res.filter(
-              el => el.author.includes(query) || el.text.includes(query)
+              el => {
+                const concat = [el.author, el.text].join("").toLowerCase();
+                return concat.includes(query.toLowerCase());
+              }
             )
             const groupedEntry = groupBy(filteredRes, quote => quote.author)
             this.groupedQuotes = groupedEntry;
@@ -82,4 +86,10 @@
 .container {
   margin-top: 2em;
 }
+</style>
+
+<style lang="scss">
+ .highlight {
+    color: rgb(109, 109, 6);
+  }
 </style>

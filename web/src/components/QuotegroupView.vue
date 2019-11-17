@@ -2,7 +2,9 @@
   <li class="list-group-item well cust-list-group-item">
     <p class="panel-title authorHeader">
       <i class="fa fa-user"></i>
-      <b>Author: {{ author }}</b>
+      <b v-html="$options.filters.highlight(author, activeQuery)">
+        Author: {{ author}}
+      </b>
     </p>
     <quote-list 
       :quotes="quotes" 
@@ -10,6 +12,7 @@
       @updated="$emit('updated')"
       @removed="$emit('removed')"
       :activeQuoteId="activeQuoteId"
+      :activeQuery="activeQuery"
     />
   </li>
 </template>
@@ -22,7 +25,8 @@ export default {
   props: {
     quotes: { type: Array, default: [] },
     author: { type: String, default: 'John Smith'},
-    activeQuoteId: { type: String, default: ''}
+    activeQuoteId: { type: String, default: ''},
+    activeQuery: { type: String, default: ''}
   },
   methods: {
       quoteClicked({mode, itemId}) {
