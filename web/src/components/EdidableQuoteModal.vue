@@ -23,7 +23,7 @@
                         </h3>
                     </div>
                     <div class="modal-body">
-                        <editable-quote :mode="'edit'" @created="hideModal" />
+                        <editable-quote :mode="'edit'" :parent="'modal'" @created="hideModal" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Dismiss</button>

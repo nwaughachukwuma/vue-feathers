@@ -28,6 +28,7 @@
     props: {
       authorQuote: { type: Object, default: () => ({text: ''}) },
       mode: { type: String, default: 'display'}, // ['display', 'edit']
+      parent: { type: String, default: '' }
     },
     data () {
       return {
@@ -37,23 +38,28 @@
     },
     methods: {
       toggleMode({mode, itemId}) {
-        this.$emit('isClicked', {mode, itemId})
+        // this.$emit('isClicked', {mode, itemId})
+        this.$store.dispatch('store_quoteClicked', {mode, itemId})
         this.displayMode = mode;
         if (mode === 'edit') {
-            this.disableAuthorField = true
+          this.disableAuthorField = true
         }
       },
       deleteQuote() {
-          this.$feathers.service('quotes').remove(this.authorQuote._id)
-            .then(() => this.$emit('removed'))
-            .catch((err) => console.log('error removing quote: ', error))
+        this.$feathers.service('quotes').remove(this.authorQuote._id)
+          .then(() => this.$emit('removed'))
+          .catch((err) => console.log('error removing quote: ', error))
       }
     },
     computed: {
       activeQuoteId () {
+        if (this.parent === 'modal') {
+          this.displayMode = 'edit';
+          return
+        }
         const activeQuoteId = this.$store.state.activeQuoteId
         if (this.authorQuote._id !== activeQuoteId) {
-            this.displayMode = 'display';
+          this.displayMode = 'display';
         }
       }
     },

@@ -4,7 +4,6 @@
       <quote-group-view 
           :quotes="quotes" 
           :author="author" 
-          @onQuoteClicked="quoteClicked" 
           @updated="$emit('updated')"
           @removed="$emit('removed')"
       />
@@ -22,20 +21,8 @@
     props: {
       groupedQuotes: { type: Object, default: {}}
     },
-    data() {
-        return {
-            activeQuoteId: null
-        }
-    },
     methods: {
       isEmpty,
-      quoteClicked({mode, itemId}) {
-        this.activeQuoteId = itemId
-        this.$store.dispatch('store_quoteId', {
-          viewMode: mode, 
-          quoteId: itemId
-        });
-      },
       searchItems: debounce(function(evt) {
         const query = evt.target.value
         this.$emit('search', {query})

@@ -6,6 +6,10 @@ export const mutations = {
     store_query(state, {query}) {
         state.activeQuery = query
     },
+    store_quoteClicked(state, {mode, itemId}) {
+        state.activeQuoteId = itemId
+        state.viewMode = mode
+    }
 }
 
 export default mutations
