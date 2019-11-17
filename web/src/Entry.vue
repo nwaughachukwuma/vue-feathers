@@ -11,16 +11,8 @@
           </div>
 
           <div class="panel-body">
-            <div class="form-group">
-              <input 
-                class="form-control" 
-                type="text" 
-                placeholder="Search" 
-                aria-label="Search"
-                @input="searchItems"
-              >
-            </div>
-
+            <search-quote @search="searchQuotes" />
+            
             <quote-group 
               :groupedQuotes="groupedQuotes" 
               @updated="fetchQuotes"
@@ -34,10 +26,11 @@
 </template>
 
 <script>
-  import {debounce, groupBy, get, isEmpty} from 'lodash'
+  import {groupBy, get, isEmpty} from 'lodash'
 
   import QuoteGroup from './components/QuoteGroup'
   import QuoteModal from './components/EdidableQuoteModal'
+  import SearchQuote from './components/SearchQuote'
 
   export default {
     data () {
@@ -46,7 +39,7 @@
         query: ''
       }
     },
-    components: { QuoteGroup, QuoteModal },
+    components: { QuoteGroup, QuoteModal, SearchQuote },
     mounted () {
       this.fetchQuotes()
     },
@@ -62,10 +55,7 @@
             console.log('An error occurred while retreiving quotes.')
           })
       },
-      searchItems: debounce(function(evt) {
-        const query = evt.target.value
-        this.searchQuotes({query})
-      }, 1000),
+
       searchQuotes({query}) {
         this.$feathers.service('quotes').find({$text: {$search: query}})
           .then( result => {
@@ -91,10 +81,5 @@
 <style lang="scss" scoped>
 .container {
   margin-top: 2em;
-}
-.searchField {
-  padding-top: 1em;
-  justify-content: center;
-  text-align: center;
 }
 </style>
