@@ -1,5 +1,5 @@
 <template>
-  <ul class="panel-body list-group" v-if="!isEmpty(groupedQuotes)">
+  <ul class="list-group" v-if="!isEmpty(groupedQuotes)">
     <div v-for="(quotes, author) in groupedQuotes" :key="quotes[0]._id">
         <quote-group-view 
             :quotes="quotes" 
@@ -11,9 +11,7 @@
         />
     </div>
   </ul>
-  <div class="panel-body" v-else>
-    <p>No quotes found.</p>
-  </div>
+  <p v-else>No quotes found.</p>
 </template>
 
 <script>

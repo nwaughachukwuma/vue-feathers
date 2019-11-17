@@ -9,22 +9,24 @@
           <div class="panel-heading">
             Existing Quotes
           </div>
-          
-          <div class="form-group">
-            <input 
-              class="form-control" 
-              type="text" 
-              placeholder="Search" 
-              aria-label="Search"
-              @input="searchItems"
-            >
-          </div>
 
-          <quote-group 
-            :groupedQuotes="groupedQuotes" 
-            @updated="fetchQuotes"
-            @removed="fetchQuotes"
-          />
+          <div class="panel-body">
+            <div class="form-group">
+              <input 
+                class="form-control" 
+                type="text" 
+                placeholder="Search" 
+                aria-label="Search"
+                @input="searchItems"
+              >
+            </div>
+
+            <quote-group 
+              :groupedQuotes="groupedQuotes" 
+              @updated="fetchQuotes"
+              @removed="fetchQuotes"
+            />
+          </div>
         </div>
       </div>
     </div>
