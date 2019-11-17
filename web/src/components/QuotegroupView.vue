@@ -9,6 +9,7 @@
         :quotes="quotes" 
         @quoteClicked="quoteClicked" 
         @updated="$emit('updated')"
+        @removed="$emit('removed')"
         :activeQuoteId="activeQuoteId"
       />
     </div>

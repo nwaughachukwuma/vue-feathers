@@ -5,16 +5,18 @@
       :key="quote._id" 
       :authorQuote="quote"
       @isClicked="itemClicked"
-      :activeQuoteId="activeQuoteId"
       @updated="$emit('updated')"
+      @removed="$emit('removed')"
+      :activeQuoteId="activeQuoteId"
     />
   </ul>
   <div class="panel-body" v-else>
-    <p>No quotes found.</p>
+    <p>No quote found.</p>
   </div>
 </template>
 
 <script>
+
   import EditableQuote from './EditableQuote'
 
   export default {
@@ -26,6 +28,10 @@
     methods: {
       itemClicked({mode, itemId}) {
         this.$emit('quoteClicked', {mode, itemId})
+      },
+      quoteCreated() {
+        console.log('am called')
+        this.$emit('created')
       }
     },
   }

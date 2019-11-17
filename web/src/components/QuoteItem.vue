@@ -1,8 +1,11 @@
 <template>
   <div @click="toggleMode">
-    <p >
-        <i class="fa fa-quote-left"></i>
-        {{ authorQuote.text }}
+    <button class="btn pull-right" @click="deleteQuote">
+      <i class="fa fa-trash deleteIcon"></i>
+    </button>
+    <p>
+      <i class="fa fa-quote-left"></i>
+      {{ authorQuote.text }}
     </p>
     <small class="text-muted" v-if="authorQuote.edited"> - updated</small>
   </div>
@@ -16,10 +19,22 @@
     methods: {
       toggleMode() {
         this.$emit('toggleMode', {mode: 'edit', itemId: this.authorQuote._id})
+      },
+      deleteQuote(e) {
+        e.stopPropagation();
+        const shouldDelete = confirm('Do you want to delete the quote?')
+        if (shouldDelete) this.$emit('remove')
       }
     },
   }
 </script>
 
 <style lang="scss" scoped>
+.deleteIcon {
+  font-size:24px;
+  color:red
+}
+.deleteButton {
+  top: - 10
+}
 </style>

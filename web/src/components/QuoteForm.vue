@@ -9,6 +9,7 @@
         placeholder="Name" 
         v-model="name"
         v-show="!disableAuthorField"
+        required
     >
     <input 
         type="text" 
@@ -29,9 +30,10 @@
       placeholder="Quote" 
       v-model="quote"
       @input="editQuote"
+      required
     >
     </div>
-    <button type="submit" class="btn btn-default" v-show="!disableAuthorField">
+    <button type="submit" class="btn btn-primary" v-show="!disableAuthorField">
       Save quote
     </button>
     <button type="button" class="btn btn-warning" v-show="disableAuthorField"
@@ -44,7 +46,7 @@
 
 <script>
 
-  import { debounce, throttle } from 'lodash'
+  import { debounce, throttle, isEmpty } from 'lodash'
 
   export default {
     props: {
@@ -60,14 +62,21 @@
     },
     methods: {
       onSubmit () {
+        if (isEmpty(this.name) || isEmpty(this.quote)) return;
         this.$feathers.service('quotes').create({
           author: this.name,
           text: this.quote
         })
-          .then(() => this.$emit('create'))
+          .then(() => {
+            this.name = ''
+            this.quote = ''
+            this.$emit('created')
+          })
+          .catch(err => console.log(err))
       },
 
       updateQuote () {
+        if (isEmpty(this.quote)) return;
         this.typing = 'updating'
         this.$feathers.service('quotes').update(this.authorQuote._id, {
           author: this.authorQuote.author,
@@ -85,7 +94,8 @@
       },
 
       editQuote: debounce(function(event) {
-          this.updateQuote()
+        if (!this.disableAuthorField) return;
+        this.updateQuote()
       }, 1000),
       toggleMode() {
         this.$emit('toggleMode', {mode: 'display', itemId: this.authorQuote._id})

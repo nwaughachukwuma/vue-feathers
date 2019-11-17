@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
 
-        <quote-modal />
+        <quote-modal @created="fetchQuotes" />
 
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -11,8 +11,8 @@
           </div>
           <quote-group 
             :groupedQuotes="groupedQuotes" 
-            @created="fetchQuotes"
             @updated="fetchQuotes"
+            @removed="fetchQuotes"
           />
         </div>
       </div>

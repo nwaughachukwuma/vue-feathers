@@ -6,8 +6,14 @@
         :disableAuthorField="disableAuthorField" 
         @toggleMode="toggleMode"
         @updated="$emit('updated')"
+        @created="$emit('created')"
     />
-    <display-quote :authorQuote="authorQuote" @toggleMode="toggleMode" v-else />
+    <display-quote 
+        :authorQuote="authorQuote" 
+        @toggleMode="toggleMode" 
+        v-else 
+        @remove="deleteQuote"
+    />
   </li>
 </template>
 
@@ -36,6 +42,11 @@
         if (mode === 'edit') {
             this.disableAuthorField = true
         }
+      },
+      deleteQuote() {
+          this.$feathers.service('quotes').remove(this.authorQuote._id)
+            .then(() => this.$emit('removed'))
+            .catch((err) => console.log('error removing quote: ', error))
       }
     },
     watch: {

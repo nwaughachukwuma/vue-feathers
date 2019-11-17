@@ -23,7 +23,7 @@
                         </h3>
                     </div>
                     <div class="modal-body">
-                        <editable-quote :mode="'edit'" />
+                        <editable-quote :mode="'edit'" @created="hideModal" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Dismiss</button>
@@ -42,7 +42,13 @@
     components: { EditableQuote },
     props: {
       quote: { type: Object }
-    }
+    },
+    methods: {
+        hideModal() {
+          $('#editableQuoteModal').modal('hide');
+          this.$emit('created')
+        }
+    },
   }
 </script>
 
