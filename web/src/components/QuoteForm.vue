@@ -84,7 +84,8 @@
         this.$feathers.service('quotes').update(this.authorQuote._id, {
           author: this.authorQuote.author,
           text: this.quote,
-          edited: true
+          edited: true,
+          updatedAt: Date.now()
         })
           .then((res) => {
             this.typing = 'updated'

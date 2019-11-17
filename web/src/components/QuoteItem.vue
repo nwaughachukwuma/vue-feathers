@@ -9,7 +9,10 @@
         {{ authorQuote.text }}
       </label>
     </p>
-    <small class="text-muted" v-if="authorQuote.edited"> - updated</small>
+    <small class="text-primary" v-if="authorQuote.edited"> 
+      <i class="fa fa-clock-o"></i> updated
+      {{ authorQuote.updatedAt && dateUtil(authorQuote.updatedAt) }}
+    </small>
   </div>
 </template>
 
@@ -26,6 +29,9 @@
         e.stopPropagation();
         const shouldDelete = confirm('Do you want to delete the quote?')
         if (shouldDelete) this.$emit('remove')
+      },
+      dateUtil(ts) {
+        return new Date(ts).toTimeString().substring(0, 8)
       }
     },
     computed: {
