@@ -17,7 +17,6 @@
               :groupedQuotes="groupedQuotes" 
               @updated="fetchQuotes"
               @removed="fetchQuotes"
-              :activeQuery="query"
             />
           </div>
         </div>

@@ -1,6 +1,7 @@
 export const state = {
     activeQuoteId: '',
-    activeQuery: ''
+    activeQuery: '',
+    viewMode: 'display'
 }
 
 export default state

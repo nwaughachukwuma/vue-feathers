@@ -1,5 +1,6 @@
 <template>
   <li class="list-group-item">
+    {{activeQuoteId}}
     <edit-quote 
         v-if="displayMode==='edit'" 
         :authorQuote="authorQuote" 
@@ -27,7 +28,6 @@
     props: {
       authorQuote: { type: Object, default: () => ({text: ''}) },
       mode: { type: String, default: 'display'}, // ['display', 'edit']
-      activeQuoteId: { type: String, default: ''},
     },
     data () {
       return {
@@ -49,6 +49,14 @@
             .catch((err) => console.log('error removing quote: ', error))
       }
     },
+    computed: {
+      activeQuoteId () {
+        const activeQuoteId = this.$store.state.activeQuoteId
+        if (this.authorQuote._id !== activeQuoteId) {
+            this.displayMode = 'display';
+        }
+      }
+    },
     watch: {
         mode: {
             handler(val) {
@@ -61,14 +69,6 @@
                 this.quote = val.text;
             },
             immediate: true
-        },
-        activeQuoteId: {
-            handler(val) {
-                if (this.authorQuote._id !== val) {
-                    this.displayMode = 'display';
-                }
-            },
-            immediate: false
         }
     }
   }

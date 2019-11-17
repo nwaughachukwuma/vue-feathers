@@ -11,7 +11,6 @@
       @quoteClicked="quoteClicked" 
       @updated="$emit('updated')"
       @removed="$emit('removed')"
-      :activeQuoteId="activeQuoteId"
     />
   </li>
 </template>
@@ -23,8 +22,7 @@ export default {
   components: { QuoteList },
   props: {
     quotes: { type: Array, default: [] },
-    author: { type: String, default: 'John Smith'},
-    activeQuoteId: { type: String, default: ''}
+    author: { type: String, default: 'John Smith'}
   },
   methods: {
     quoteClicked({mode, itemId}) {

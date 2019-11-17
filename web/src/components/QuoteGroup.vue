@@ -7,8 +7,6 @@
           @onQuoteClicked="quoteClicked" 
           @updated="$emit('updated')"
           @removed="$emit('removed')"
-          :activeQuoteId="activeQuoteId"
-          :activeQuery="activeQuery"
       />
     </div>
   </ul>
@@ -22,8 +20,7 @@
   export default {
     components: { QuoteGroupView },
     props: {
-      groupedQuotes: { type: Object, default: {}},
-      activeQuery: { type: String, default: '' }
+      groupedQuotes: { type: Object, default: {}}
     },
     data() {
         return {
@@ -34,6 +31,10 @@
       isEmpty,
       quoteClicked({mode, itemId}) {
         this.activeQuoteId = itemId
+        this.$store.dispatch('store_quoteId', {
+          viewMode: mode, 
+          quoteId: itemId
+        });
       },
       searchItems: debounce(function(evt) {
         const query = evt.target.value

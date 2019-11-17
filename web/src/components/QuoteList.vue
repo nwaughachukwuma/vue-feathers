@@ -7,7 +7,6 @@
       @isClicked="itemClicked"
       @updated="$emit('updated')"
       @removed="$emit('removed')"
-      :activeQuoteId="activeQuoteId"
     />
   </ul>
   <p v-else>No quote found.</p>
@@ -20,8 +19,7 @@
   export default {
     components: { EditableQuote },
     props: {
-      quotes: { type: Array, default: [] },
-      activeQuoteId: { type: String, default: ''}
+      quotes: { type: Array, default: [] }
     },
     methods: {
       itemClicked({mode, itemId}) {
