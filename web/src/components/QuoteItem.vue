@@ -17,7 +17,6 @@
   export default {
     props: {
       authorQuote: { type: Object, required: true },
-      activeQuery: { type: String, default: ''}
     },
     methods: {
       toggleMode() {
@@ -29,6 +28,11 @@
         if (shouldDelete) this.$emit('remove')
       }
     },
+    computed: {
+      activeQuery () {
+        return this.$store.state.activeQuery
+      }
+    }
   }
 </script>
 

@@ -12,7 +12,6 @@
       @updated="$emit('updated')"
       @removed="$emit('removed')"
       :activeQuoteId="activeQuoteId"
-      :activeQuery="activeQuery"
     />
   </li>
 </template>
@@ -25,14 +24,18 @@ export default {
   props: {
     quotes: { type: Array, default: [] },
     author: { type: String, default: 'John Smith'},
-    activeQuoteId: { type: String, default: ''},
-    activeQuery: { type: String, default: ''}
+    activeQuoteId: { type: String, default: ''}
   },
   methods: {
-      quoteClicked({mode, itemId}) {
-        this.$emit('onQuoteClicked',{ mode, itemId})
-      }
+    quoteClicked({mode, itemId}) {
+      this.$emit('onQuoteClicked',{ mode, itemId})
+    }
   },
+  computed: {
+    activeQuery () {
+      return this.$store.state.activeQuery
+    }
+  }
 };
 </script>
 

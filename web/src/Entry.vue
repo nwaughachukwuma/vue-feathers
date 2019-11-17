@@ -76,7 +76,10 @@
           .catch (err => {
             this.groupedQuotes = {};
             console.log(err)
-          }).finally(() => this.query = query)
+          }).finally(() => {
+            this.$store.dispatch('store_query', {query});
+            return this.query = query
+          })
       }
     }
   }
@@ -90,6 +93,8 @@
 
 <style lang="scss">
  .highlight {
-    color: rgb(109, 109, 6);
+    color: white;
+    background-color: teal;
+    border-radius: 5px;
   }
 </style>

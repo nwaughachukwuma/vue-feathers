@@ -13,7 +13,6 @@
         @toggleMode="toggleMode" 
         v-else 
         @remove="deleteQuote"
-        :activeQuery="activeQuery"
     />
   </li>
 </template>
@@ -29,7 +28,6 @@
       authorQuote: { type: Object, default: () => ({text: ''}) },
       mode: { type: String, default: 'display'}, // ['display', 'edit']
       activeQuoteId: { type: String, default: ''},
-      activeQuery: { type: String, default: ''}
     },
     data () {
       return {

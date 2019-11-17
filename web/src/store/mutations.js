@@ -1,15 +1,9 @@
 export const mutations = {
-    store_events(state, {events}) {
-        state.events = events
+    store_quoteId(state, {quoteId}) {
+        state.activeQuoteId = quoteId
     },
-    store_concluded_events(state, {concluded_events}) {
-        state.concluded_events = concluded_events
-    },
-    store_paidout_events(state, {paidout_events}) {
-        state.paidout_events = paidout_events
-    },
-    store_users(state, {users}) {
-        state.users = users
+    store_query(state, {query}) {
+        state.activeQuery = query
     },
 }
 
