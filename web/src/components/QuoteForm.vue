@@ -41,14 +41,17 @@
         Dismiss
     </button>
     <small class="text-muted" v-if="typing==='updating'">{{typing}}...</small>
+    <loopy-button />
   </form>
 </template>
 
 <script>
 
   import { debounce, throttle, isEmpty } from 'lodash'
+  import LoopyButton from './LoopyButton'
 
   export default {
+    components: {LoopyButton},
     props: {
       authorQuote: { type: Object, required: true },
       disableAuthorField: { type: Boolean, default: false}

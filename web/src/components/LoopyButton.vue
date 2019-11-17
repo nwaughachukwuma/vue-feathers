@@ -13,7 +13,7 @@
       }
     },
     methods: {
-      onClick: () => {
+      onClick: function() {
         this.n += 1
       }
     }
