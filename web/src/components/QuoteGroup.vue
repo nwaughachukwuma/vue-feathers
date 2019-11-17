@@ -1,5 +1,14 @@
 <template>
-  <ul class="list-group" v-if="!isEmpty(groupedQuotes)">
+  <ul class="panel-body list-group" v-if="!isEmpty(groupedQuotes)">
+    <span class="list-group-item">
+      <input 
+        class="form-control" 
+        type="text" 
+        placeholder="Search" 
+        aria-label="Search"
+        @input="searchItems"
+      >
+    </span>
     <div v-for="(quotes, author) in groupedQuotes" :key="quotes[0]._id">
         <quote-group-view 
             :quotes="quotes" 
@@ -18,7 +27,7 @@
 
 <script>
   import QuoteGroupView from './QuoteGroupView'
-  import { isEmpty } from 'lodash'
+  import { debounce, isEmpty, groupBy } from 'lodash'
 
   export default {
     components: { QuoteGroupView },
@@ -34,7 +43,11 @@
       isEmpty,
       quoteClicked({mode, itemId}) {
         this.activeQuoteId = itemId
-      }
+      },
+      searchItems: debounce(function(evt) {
+        const query = evt.target.value
+        this.$emit('search', {query})
+      }, 1000)
     }
   }
 </script>

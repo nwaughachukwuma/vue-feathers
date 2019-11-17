@@ -13,6 +13,7 @@
             :groupedQuotes="groupedQuotes" 
             @updated="fetchQuotes"
             @removed="fetchQuotes"
+            @search="searchQuotes"
           />
         </div>
       </div>
@@ -21,7 +22,7 @@
 </template>
 
 <script>
-  import {groupBy} from 'lodash'
+  import {groupBy, get, isEmpty} from 'lodash'
 
   import QuoteGroup from './components/QuoteGroup'
   import QuoteModal from './components/EdidableQuoteModal'
@@ -46,6 +47,24 @@
           })
           .catch(() => {
             console.log('An error occurred while retreiving quotes.')
+          })
+      },
+      searchQuotes({query}) {
+        this.$feathers.service('quotes').find({$text: {$search: query}})
+          .then( result => {
+            const res = get(result, 'data', undefined);
+            if (isEmpty(res)) {
+              throw new Error('No result found')
+            }
+            const filteredRes = res.filter(
+              el => el.author.includes(query) || el.text.includes(query)
+            )
+            const groupedEntry = groupBy(filteredRes, quote => quote.author)
+            this.groupedQuotes = groupedEntry;
+          })
+          .catch (err => {
+            this.groupedQuotes = {};
+            console.log(err)
           })
       }
     }
