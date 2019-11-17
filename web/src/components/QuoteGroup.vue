@@ -5,6 +5,7 @@
             :quotes="quotes" 
             :author="author" 
             @onQuoteClicked="quoteClicked" 
+            @updated="$emit('updated')"
             :activeQuoteId="activeQuoteId"
         />
     </div>

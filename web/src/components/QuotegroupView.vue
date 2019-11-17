@@ -8,6 +8,7 @@
       <quote-list 
         :quotes="quotes" 
         @quoteClicked="quoteClicked" 
+        @updated="$emit('updated')"
         :activeQuoteId="activeQuoteId"
       />
     </div>

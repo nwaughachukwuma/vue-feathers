@@ -5,6 +5,7 @@
         :authorQuote="authorQuote" 
         :disableAuthorField="disableAuthorField" 
         @toggleMode="toggleMode"
+        @updated="$emit('updated')"
     />
     <display-quote :authorQuote="authorQuote" @toggleMode="toggleMode" v-else />
   </li>

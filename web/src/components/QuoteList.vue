@@ -6,6 +6,7 @@
       :authorQuote="quote"
       @isClicked="itemClicked"
       :activeQuoteId="activeQuoteId"
+      @updated="$emit('updated')"
     />
   </ul>
   <div class="panel-body" v-else>
