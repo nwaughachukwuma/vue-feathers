@@ -9,7 +9,8 @@
           <div class="panel-heading">
             Existing Quotes
           </div>
-          <span class="searchField">
+          
+          <div class="form-group">
             <input 
               class="form-control" 
               type="text" 
@@ -17,7 +18,8 @@
               aria-label="Search"
               @input="searchItems"
             >
-          </span>
+          </div>
+
           <quote-group 
             :groupedQuotes="groupedQuotes" 
             @updated="fetchQuotes"
@@ -89,7 +91,8 @@
   margin-top: 2em;
 }
 .searchField {
-  margin-right: 1em;
-  padding-inline: 1em;
+  padding-top: 1em;
+  justify-content: center;
+  text-align: center;
 }
 </style>
