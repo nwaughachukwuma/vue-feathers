@@ -11,9 +11,7 @@
       :activeQuery="activeQuery"
     />
   </ul>
-  <div class="panel-body" v-else>
-    <p>No quote found.</p>
-  </div>
+  <p v-else>No quote found.</p>
 </template>
 
 <script>

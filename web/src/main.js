@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueFeathers from 'vue-feathers'
 
+import store from './store'
 import feathersClient from './feathers'
 import Entry from './Entry'
 
@@ -20,8 +21,7 @@ Vue.filter('highlight', function(word, query){
 Vue.use(Vuex)
 Vue.use(VueFeathers, feathersClient())
 
-const store = new Vuex.Store({
-})
+// const store = new Vuex.Store({ })
 
 // eslint-disable-next-line no-new
 new Vue({

@@ -1,15 +1,15 @@
 <template>
   <ul class="list-group" v-if="!isEmpty(groupedQuotes)">
     <div v-for="(quotes, author) in groupedQuotes" :key="quotes[0]._id">
-        <quote-group-view 
-            :quotes="quotes" 
-            :author="author" 
-            @onQuoteClicked="quoteClicked" 
-            @updated="$emit('updated')"
-            @removed="$emit('removed')"
-            :activeQuoteId="activeQuoteId"
-            :activeQuery="activeQuery"
-        />
+      <quote-group-view 
+          :quotes="quotes" 
+          :author="author" 
+          @onQuoteClicked="quoteClicked" 
+          @updated="$emit('updated')"
+          @removed="$emit('removed')"
+          :activeQuoteId="activeQuoteId"
+          :activeQuery="activeQuery"
+      />
     </div>
   </ul>
   <p v-else>No quotes found.</p>
