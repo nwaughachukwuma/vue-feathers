@@ -31,7 +31,12 @@
         if (shouldDelete) this.$emit('remove')
       },
       dateUtil(ts) {
-        return new Date(ts).toTimeString().substring(0, 8)
+        const date = new Date(ts);
+        const day = date.getDate();
+        const month = date.getMonth();
+        const year = date.getFullYear();
+        const _date = ` (${month}-${day}-${year})`;
+        return new Date(ts).toTimeString().substring(0,5) + _date
       }
     },
     computed: {
