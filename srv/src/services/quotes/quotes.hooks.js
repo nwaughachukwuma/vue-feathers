@@ -6,7 +6,7 @@ module.exports = {
   before: {
     all: [],
     find: [async (context) => {
-      console.log('find method context :==> ', context)
+      // console.log('find method context :==> ', context)
     }],
     get: [],
     create: [async (context) => hooksFunction(context, 'create')],
