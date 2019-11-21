@@ -17,6 +17,13 @@ module.exports = function () {
 
   mongoClient.then(db => {
     service.Model = db.collection('archived-quotes');
+    // create index on archived quotes collections
+    try {
+      service.Model.createIndex({ text: 'text', author: 'text' })
+    } catch (error) {
+      console.warn('error creating index')
+      console.error(error)
+    }
   });
 
   service.hooks(hooks);

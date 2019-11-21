@@ -1,4 +1,5 @@
 const getUniqueLetters = require('./helpers')
+const { isEqual } = require('lodash')
 
 module.exports = async (context, method = 'creat') => {
     let hookMethod = method === 'create'? 'create': 'update';
@@ -22,20 +23,24 @@ module.exports = async (context, method = 'creat') => {
 
     // text 3: check plagiarism
     const result = await context.app.service('quotes').find()
+    
+    const arch_result = await context.app.service('archived-quotes').find();
+    console.log('archived-quotes length: ', arch_result.data.length);
+
     const previousQuotes = result.data;
     const currentQuote = context.data;
     previousQuotes.forEach( quote => {
         const firstThreeWordsinQuote = quote.text.split(' ').slice(0,3).join(' ');
         const firstThreeWordsinCurrentQuote = currentQuote.text.split(' ').slice(0,3).join(' ')
-        console.log('quotes comparison :=>>', quote, context.id, firstThreeWordsinQuote, firstThreeWordsinCurrentQuote)
+        // console.log('quotes comparison :=>>', quote._id, context.id) //, firstThreeWordsinQuote, firstThreeWordsinCurrentQuote)
         
-        if (quote._id !== context.id && firstThreeWordsinQuote === firstThreeWordsinCurrentQuote) {
-            throw new Error('This quote violates rule 3: Quote should not be plagiarised')
+        if (quote._id != context.id) {
+            if (firstThreeWordsinQuote === firstThreeWordsinCurrentQuote) {
+                throw new Error('This quote violates rule 3: Quote should not be plagiarised')
+            }
         }
     })
 
     console.log(`hook ${hookMethod} :==>>`, currentQuote)
     return context;
-  }
-
-// module.exports  = { hooksFunction }
+}
