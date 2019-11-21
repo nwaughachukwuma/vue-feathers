@@ -3,7 +3,7 @@
 module.exports = {
   before: {
     all: [],
-    find: [],
+    find: [async context => console.log('archived-quotes find :=>>', context.params)],
     get: [],
     create: [],
     update: [],

@@ -24,7 +24,12 @@ module.exports = async (context, method = 'creat') => {
     // text 3: check plagiarism
     const result = await context.app.service('quotes').find()
     
-    const arch_result = await context.app.service('archived-quotes').find();
+    const arch_result = await context.app.service('archived-quotes')
+        .find({
+            // query: {text: { $search: 's' }},
+            $text: {$search: 'sam'},
+        }, {text: 1});
+
     console.log('archived-quotes length: ', arch_result.data.length);
 
     const previousQuotes = result.data;

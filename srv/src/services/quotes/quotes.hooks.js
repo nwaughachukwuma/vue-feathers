@@ -5,9 +5,7 @@ const { hooksFunction } = require('../../handlers')
 module.exports = {
   before: {
     all: [],
-    find: [async (context) => {
-      console.log('find method context :==> ', context.params)
-    }],
+    find: [async context => console.log('quotes find :=>>', context.params)],
     get: [],
     create: [async (context) => hooksFunction(context, 'create')],
     update: [async (context) => hooksFunction(context, 'update')],
