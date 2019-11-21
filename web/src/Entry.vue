@@ -57,12 +57,16 @@
       },
 
       searchQuotes({query}) {
-        this.$feathers.service('quotes').find({$text: {$search: query}})
+        this.$feathers.service('quotes').find({
+          $text: {$search: query, $caseSensitive: false}
+        
+        })
           .then( result => {
             const res = get(result, 'data', undefined);
             if (isEmpty(res)) {
               throw new Error('No result found')
             }
+            console.log(':=>>', res)
             const filteredRes = res.filter(
               el => {
                 const concat = [el.author, el.text].join("").toLowerCase();
@@ -79,6 +83,19 @@
             this.$store.dispatch('store_query', {query});
             return this.query = query
           })
+      }
+    },
+    feathers: { // here is our section
+      quotes: { // here is the subsection for the 'messages' service
+        created(data) {
+          console.log('created listener data', data)
+        },
+        updated(data) {
+          console.log('updated listener data', data)
+        },
+        removed(data) {
+          console.log('removed listener data', data)
+        }
       }
     }
   }

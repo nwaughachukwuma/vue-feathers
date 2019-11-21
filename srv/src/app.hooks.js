@@ -32,7 +32,12 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [],
+    update: [async (context) => {
+      console.error(
+        `Error in '${context.path}' service method '${context.method}'`, 
+        context.error.stack
+      );
+    }],
     patch: [],
     remove: []
   }

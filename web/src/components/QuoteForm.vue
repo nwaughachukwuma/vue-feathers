@@ -40,7 +40,9 @@
         @click="toggleMode">
         Dismiss
     </button>
-    <small class="text-muted" v-if="typing==='updating'">{{typing}}...</small>
+    <small class="text-muted" v-if="typing==='updating'">
+      <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+    </small>
     <loopy-button />
   </form>
 </template>
@@ -93,6 +95,7 @@
           })
           .catch( (err) => {
             console.error(err)
+            alert(err.message)
             this.typing = 'update failed'
           })
       },
