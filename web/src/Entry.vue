@@ -102,6 +102,17 @@
         removed(data) {
           console.log('removed listener data', data)
         }
+      },
+      comments: { // here is the subsection for the 'messages' service
+        created(data) {
+          console.log('created listener data', data)
+        },
+        updated(data) {
+          console.log('updated listener data', data)
+        },
+        removed(data) {
+          console.log('removed listener data', data)
+        }
       }
     }
   }

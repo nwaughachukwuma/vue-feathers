@@ -5,7 +5,14 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [async context => {
+      context.data.createdAt = Date.now();
+      const data = context.data
+      console.log(data)
+      if (!data || !data.quoteId) {
+        throw new Error('Please specify the quote this comment belongs to')
+      }
+    }],
     update: [],
     patch: [],
     remove: []

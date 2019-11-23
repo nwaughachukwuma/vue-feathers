@@ -9,7 +9,10 @@ export const mutations = {
     store_quoteClicked(state, {mode, itemId}) {
         state.activeQuoteId = itemId
         state.viewMode = mode
-    }
+    },
+    store_commentClicked(state, {quoteId}) {
+        state.activeQuoteId = quoteId
+    },
 }
 
 export default mutations

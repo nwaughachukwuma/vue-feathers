@@ -5,24 +5,34 @@
             class="btn pull-right"
             @click.stop.prevent="showModal"
         >
-        <!-- @click.stop.prevent="showModal" -->
         <i class="fa fa-comment commentIcon"></i>
         <small for="">{{commentCount}}</small>
         </button>
-        <!-- Modal -->
-        <div @click.stop.prevent="true" class="modal fade" id="quoteCommentsModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel1" aria-hidden="true">
+        <!-- Comments Modal -->
+        <div @click.stop.prevent="() => true" class="modal fade" :id="'qCM'+authorQuote._id" tabindex="-1" role="dialog" aria-labelledby="modalLabel1" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h3 class="modal-title" id="modalLabel1">
-                            New comment
+                            Comments
                             <button type="button" class="close" aria-label="Close" @click.stop="hideModal">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </h3>
                     </div>
                     <div class="modal-body">
-                        <comment-quote :mode="'edit'" :parent="'modal'" @created="hideModal" />
+                        <!-- show all the comments here -->
+                        <span v-if="fetching">
+                            <i class="fa fa-spinner fa-spin"></i>
+                        </span>
+                        <ul v-else class="list-group" v-for="(comment, index) in comments" :key="index">
+                            <comment-item :comment="comment" />
+                        </ul>
+                        <comment-quote 
+                            :authorQuote="authorQuote" 
+                            @created="hideModal"
+                            @commentCreated="refreshComments"
+                        />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-warning" @click.stop="hideModal">Dismiss</button>
@@ -35,27 +45,65 @@
 
 <script>
 
-import CommentQuote from './EditableQuote'
+import CommentQuote from './CommentForm'
+import CommentItem from './CommentItem'
+import { isEmpty } from 'lodash'
 
 export default {
     name: 'quote-comments',
-    components: {CommentQuote},
+    components: {CommentQuote, CommentItem},
     props: {
         authorQuote: { type: Object, required: true },
     },
     data() {
       return {
         commentCount: 0,
-        isModal: false
+        comments: [],
+        fetching: false
       }
     },
     methods: {
-        showModal(e) {
-            $('#quoteCommentsModal').modal('toggle');
+        isEmpty,
+        async showModal(e) {
+            $('#qCM'+this.authorQuote._id).modal('toggle');
+            await this.$store.dispatch('store_commentClicked', {quoteId: this.authorQuote._id})
+            this.fetching = true;
+            this.fetchComments(this.authorQuote._id)
         },
         hideModal(e) {
-            $('#quoteCommentsModal').modal('hide');
+            $('#qCM'+this.authorQuote._id).modal('hide');
             //   this.$emit('created')
+        },
+        async fetchComments(quoteId) {
+            // const quoteId =  this.$store.state.activeQuoteId;
+            if (quoteId !== this.authorQuote._id) return;
+            const result = await this.$feathers.service('comments').find({
+                query: {
+                    quoteId,
+                }
+            });
+            this.fetching = false;
+            this.comments = result.data || [];
+        },
+        refreshComments({quoteId, commentId}) {
+            this.fetchComments(quoteId)
+        }
+    },
+    mounted() {
+        const quoteId = this.authorQuote._id;
+        this.$feathers.service('comments').find({
+            query: {
+                quoteId,
+            }
+        })
+        .then(res => this.comments = res.data)
+    },
+    watch: {
+        comments: {
+            handler(val) {
+                this.commentCount = Math.max(val.length, 0)
+            },
+            immediate: true
         }
     },
 }

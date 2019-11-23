@@ -7,11 +7,11 @@
       </label>
     </p>
     <div class="row">
-      <small class="text-primary col-md-5" v-if="authorQuote.edited"> 
+      <small class="text-primary col-xs-5 col-sm-5 col-md-5 col-lg-12" v-if="authorQuote.edited"> 
         <i class="fa fa-clock-o"></i>
         {{ authorQuote.updatedAt && dateUtil(authorQuote.updatedAt) }}
       </small>
-      <span class="col-md-7 pull-right actionButtons">
+      <span class="col-xs-7 col-sm-7 col-md-7 col-lg-12 pull-right actionButtons">
         <button class="btn pull-right" @click="deleteQuote">
           <i class="fa fa-trash deleteIcon"></i>
         </button>
