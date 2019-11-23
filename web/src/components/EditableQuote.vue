@@ -24,6 +24,7 @@
   import EditQuote from './QuoteForm'
 
   export default {
+    name: 'editable-quote',
     components: { DisplayQuote, EditQuote },
     props: {
       authorQuote: { type: Object, default: () => ({text: ''}) },
