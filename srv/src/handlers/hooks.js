@@ -22,15 +22,17 @@ module.exports = async (context, method = 'creat') => {
     }
 
     // text 3: check plagiarism
-    const result = await context.app.service('quotes').find()
-    
+    const result = await context.app.service('quotes').find();
+
+    const rule3Message = 'This quote violates rule 3: Quote should not be plagiarised';
     const arch_result = await context.app.service('archived-quotes')
         .find({
-            // query: {text: { $search: 's' }},
-            $text: {$search: 'sam'},
+            // query: {text: { $search: quoteText }},
+            query: {$search: quoteText }
         }, {text: 1});
-
-    console.log('archived-quotes length: ', arch_result.data.length);
+    if (arch_result.data.length) {
+      throw new Error(rule3Message)
+    }
 
     const previousQuotes = result.data;
     const currentQuote = context.data;
@@ -38,10 +40,9 @@ module.exports = async (context, method = 'creat') => {
         const firstThreeWordsinQuote = quote.text.split(' ').slice(0,3).join(' ');
         const firstThreeWordsinCurrentQuote = currentQuote.text.split(' ').slice(0,3).join(' ')
         // console.log('quotes comparison :=>>', quote._id, context.id) //, firstThreeWordsinQuote, firstThreeWordsinCurrentQuote)
-        
         if (quote._id != context.id) {
             if (firstThreeWordsinQuote === firstThreeWordsinCurrentQuote) {
-                throw new Error('This quote violates rule 3: Quote should not be plagiarised')
+                throw new Error(rule3Message)
             }
         }
     })

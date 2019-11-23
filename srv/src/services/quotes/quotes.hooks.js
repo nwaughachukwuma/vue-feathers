@@ -1,11 +1,21 @@
 // @ts-check
+// @ts-ignore
+const search = require('feathers-mongodb-fuzzy-search')
 const { hooksFunction } = require('../../handlers')
 
 // @ts-ignore
 module.exports = {
   before: {
-    all: [],
-    find: [async context => console.log('quotes find :=>>', context.params)],
+    all: [
+      search(),
+      search({
+        fields: ['text', 'author'], 
+        escape: false
+      })
+    ],
+    find: [async context => {
+      console.log('quotes find :=>>', context.params)
+    }],
     get: [],
     create: [async (context) => hooksFunction(context, 'create')],
     update: [async (context) => hooksFunction(context, 'update')],

@@ -57,10 +57,15 @@
       },
 
       searchQuotes({query}) {
-        this.$feathers.service('quotes').find({
-          // $text: {$search: query, $caseSensitive: false},
-          query: {text: query},
-          $text: {$search: query},
+        this.$feathers.service('quotes')
+        .find({
+            query: {
+              $or: [
+                { text: { $search: query } },
+                { author: { $search: query } }
+              ],
+              // $search: query,
+            },
         }, {text: 1, author: 1})
           .then( result => {
             const res = get(result, 'data', undefined);

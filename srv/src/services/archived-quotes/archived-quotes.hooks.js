@@ -1,8 +1,14 @@
-
+const search = require('feathers-mongodb-fuzzy-search')
 
 module.exports = {
   before: {
-    all: [],
+    all: [
+      search(),
+      // search({
+      //   fields: ['text'], 
+      //   escape: false
+      // })
+    ],
     find: [async context => console.log('archived-quotes find :=>>', context.params)],
     get: [],
     create: [],

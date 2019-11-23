@@ -20,7 +20,7 @@ import {debounce} from 'lodash'
 export default {
     methods: {
         searchItems: debounce(function(evt) {
-        const query = evt.target.value
+        const query = evt.target.value;
         this.$emit('search', {query})
       }, 1000),
     },
