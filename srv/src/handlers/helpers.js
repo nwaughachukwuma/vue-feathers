@@ -1,6 +1,6 @@
 const specialCharFormat = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?£]/ig;
 
-module.exports = (str) => {
+const getUniqueLetters = (str) => {
   if (typeof str !== 'string') return ''
   return str.toLowerCase()
     .replace(specialCharFormat, '')
@@ -8,3 +8,5 @@ module.exports = (str) => {
     .filter((el, ix, arr) => el.trim() && arr.indexOf(el) === ix)
     .join('')
 }
+
+module.exports = {getUniqueLetters}

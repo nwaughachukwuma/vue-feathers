@@ -1,5 +1,6 @@
-const getUniqueLetters = require('./helpers')
-const { isEqual } = require('lodash')
+// @ts-check
+
+const {getUniqueLetters} = require('./helpers')
 
 module.exports = async (context, method = 'creat') => {
     let hookMethod = method === 'create'? 'create': 'update';
@@ -22,8 +23,6 @@ module.exports = async (context, method = 'creat') => {
     }
 
     // text 3: check plagiarism
-    const result = await context.app.service('quotes').find();
-
     const rule3Message = 'This quote violates rule 3: Quote should not be plagiarised';
     const arch_result = await context.app.service('archived-quotes')
         .find({
@@ -34,6 +33,7 @@ module.exports = async (context, method = 'creat') => {
       throw new Error(rule3Message)
     }
 
+    const result = await context.app.service('quotes').find();
     const previousQuotes = result.data;
     const currentQuote = context.data;
     previousQuotes.forEach( quote => {
