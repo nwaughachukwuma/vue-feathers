@@ -5,6 +5,8 @@
 
         <quote-modal @created="fetchQuotes" />
 
+        <login-btn />
+
         <div class="panel panel-default">
           <div class="panel-heading">
             Existing Quotes
@@ -31,6 +33,7 @@
   import QuoteGroup from './components/QuoteGroup'
   import QuoteModal from './components/EdidableQuoteModal'
   import SearchQuote from './components/SearchQuote'
+  import LoginBtn from './components/auth/login'
 
   export default {
     data () {
@@ -39,7 +42,7 @@
         query: ''
       }
     },
-    components: { QuoteGroup, QuoteModal, SearchQuote },
+    components: { QuoteGroup, QuoteModal, SearchQuote, LoginBtn },
     mounted () {
       this.fetchQuotes()
     },

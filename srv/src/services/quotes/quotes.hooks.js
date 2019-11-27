@@ -14,7 +14,7 @@ module.exports = {
       })
     ],
     find: [async context => {
-      // console.log('quotes find :=>>', context.params)
+      console.log('quotes find :=>>', context.params)
     }],
     get: [],
     create: [async (context) => hooksFunction(context, 'create')],

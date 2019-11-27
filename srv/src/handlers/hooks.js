@@ -1,5 +1,3 @@
-// @ts-check
-
 const {getUniqueLetters} = require('./helpers')
 
 module.exports = async (context, method = 'creat') => {
