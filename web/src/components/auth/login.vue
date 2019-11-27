@@ -12,7 +12,7 @@ export default {
     props: {},
     data() {
         return {
-            email: 'jmadison@gmail.com',
+            email: 'zachcasey10@gmail.com',
             password: 'supersecret'
         }
     },

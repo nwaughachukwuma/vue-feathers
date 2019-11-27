@@ -20,7 +20,7 @@ module.exports = function () {
 
     try {
       service.Model.createIndex({ status: 1 });
-      service.Model.createIndex({ quoteId: 1 });
+      service.Model.createIndex({ userId: 1, quoteId: 1 });
       // we'd need userId
     } catch (error) {
       console.warn('error creating index')

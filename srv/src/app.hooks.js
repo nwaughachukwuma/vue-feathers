@@ -2,7 +2,7 @@
 const logger = require('./hooks/logger');
 const { authenticate } = require('feathers-authentication').hooks;
 const { iffElse } = require('feathers-hooks-common');
-// https://feathers-plus.github.io/v1/feathers-hooks-common/#discard
+// https://feathers-plus.github.io/v1/feathers-hooks-common
 
 
 const serviceType = noAuthPaths => (hook) => noAuthPaths.includes(hook.path)
