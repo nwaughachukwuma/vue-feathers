@@ -2,7 +2,6 @@ const authentication = require('feathers-authentication');
 const jwt = require('feathers-authentication-jwt');
 const local = require('feathers-authentication-local');
 
-
 module.exports = function () {
   const app = this;
   const config = app.get('authentication');
@@ -42,6 +41,7 @@ module.exports = function () {
         hook => {
           delete hook.params.user.password
           hook.result.user = hook.params.user;
+          hook.result.lastLogin = Date.now();
           hook.result.payload = hook.params.payload
         }
       ]

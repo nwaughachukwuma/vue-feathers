@@ -50,6 +50,9 @@
     components: { QuoteGroup, QuoteModal, SearchQuote, LoginBtn, SignupForm },
     mounted () {
       this.fetchQuotes()
+      
+      const session = JSON.parse(window.localStorage.session)
+      this.$store.dispatch('store_session', {session});
     },
     methods: {
       fetchQuotes () {
@@ -65,7 +68,6 @@
             console.log('An error occurred while retreiving quotes.')
           })
       },
-
       searchQuotes({query}) {
         this.$feathers.service('quotes')
         .find({

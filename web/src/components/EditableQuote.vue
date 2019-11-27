@@ -23,6 +23,9 @@
   import DisplayQuote from './QuoteItem'
   import EditQuote from './QuoteForm'
 
+  import clientAuth from '../auth'
+  const authHeaders = clientAuth()
+
   export default {
     name: 'editable-quote',
     components: { DisplayQuote, EditQuote },
@@ -47,7 +50,9 @@
         }
       },
       deleteQuote() {
-        this.$feathers.service('quotes').remove(this.authorQuote._id)
+        this.$feathers.service('quotes').remove(this.authorQuote._id, {
+          headers: authHeaders
+        })
           .then(() => this.$emit('removed'))
           .catch((err) => console.log('error removing quote: ', error))
       }

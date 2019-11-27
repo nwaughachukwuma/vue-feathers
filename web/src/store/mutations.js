@@ -13,6 +13,11 @@ export const mutations = {
     store_commentClicked(state, {quoteId}) {
         state.activeQuoteId = quoteId
     },
+    store_session(state, {session}) {
+        state.session = session
+        // save to local storage
+        window.localStorage.session = JSON.stringify(session);
+    }
 }
 
 export default mutations

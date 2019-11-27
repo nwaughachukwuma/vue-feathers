@@ -10,7 +10,7 @@
                         <input 
                             type="text" 
                             class="form-control" 
-                            id="inputComment" 
+                            :id="formId"
                             placeholder="Write..." 
                             v-model="comment"
                             required
@@ -31,6 +31,9 @@
 <script>
 
   import { debounce, throttle, isEmpty } from 'lodash'
+  import v4 from 'uuid/v4'
+  import clientAuth from '../auth'
+  const authHeaders = clientAuth()
 
   export default {
     props: {
@@ -40,19 +43,23 @@
       return {
         name: '',
         comment: '',
-        typing: undefined
+        typing: undefined,
+        formId: v4()
       }
     },
     methods: {
       onSubmit () {
         // get user name and id from auth object
         if (isEmpty(this.comment)) return;
+        if (isEmpty(this.user)) return
+        
         const quoteId = this.activeQuoteId;
         this.$feathers.service('comments').create({
           quoteId,
-          author: 'Nnamdi Bruce',
-          text: this.comment
-        })
+          author: this.user.name,
+          text: this.comment,
+          userId: this.user._id
+        }, {headers: authHeaders})
           .then( res => {
             this.name = ''
             this.comment = ''
@@ -62,9 +69,12 @@
       },
     },
     computed: {
-        activeQuoteId () {
-            return this.$store.state.activeQuoteId
-        }
+      activeQuoteId () {
+        return this.$store.state.activeQuoteId
+      },
+      user() {
+        return this.$store.getters.user
+      }
     },
     watch: {
       authorQuote: {

@@ -7,6 +7,9 @@
 
 <script>
   import {debounce} from 'lodash'
+  import clientAuth from '../auth'
+  const authHeaders = clientAuth()
+
   export default {
     props: {
       authorQuote: { type: Object, required: true },
@@ -35,7 +38,7 @@
           ...this.authorQuote,
           updatedAt: Date.now(),
           likeCount: this.likeCount
-        })
+        }, {headers: authHeaders})
           .then((res) => this.$emit('liked'))
           .catch( (err) => {
             console.error(err)

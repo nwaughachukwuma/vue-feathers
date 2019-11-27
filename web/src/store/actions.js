@@ -11,6 +11,9 @@ export const actions = {
     store_commentClicked({commit}, payload) {
         commit('store_commentClicked', payload)
     },
+    store_session({commit}, payload) {
+        commit('store_session', payload)
+    }
 }
 
 export default actions

@@ -1,15 +1,11 @@
 const { authenticate } = require('feathers-authentication').hooks;
 const commonHooks = require('feathers-hooks-common');
-const { restrictToOwner, setField } = require('feathers-authentication-hooks');
+const { setField } = require('feathers-authentication-hooks');
 const search = require('feathers-mongodb-fuzzy-search')
 
 const { hashPassword } = require('feathers-authentication-local').hooks;
 const restrict = [
   authenticate('jwt'),
-  // restrictToOwner({
-  //   idField: '_id',
-  //   ownerField: '_id'
-  // })
   setField({
     from: 'params.user._id',
     as: 'params.query.userId'
@@ -21,7 +17,7 @@ module.exports = {
     all: [
       search(),
       search({
-        fields: ['email'], 
+        fields: ['email', 'name'], 
         escape: false
       })
     ],

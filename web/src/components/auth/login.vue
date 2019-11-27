@@ -12,7 +12,7 @@ export default {
     props: {},
     data() {
         return {
-            email: 'nnamdi.bruce@gmail.com',
+            email: 'jmadison@gmail.com',
             password: 'supersecret'
         }
     },
@@ -26,16 +26,12 @@ export default {
             })
             .then(
                 res => {
-                    // save to local storage
                     let credentials = {
-                        user: {
-                            ...res.user
-                        }, 
+                        ...res,
+                        user: {...res.user}, 
                         accessToken: res.accessToken,
-                        lastLogin: Date.now()
                     };
-                    credentials = JSON.stringify(credentials)
-                    window.localStorage.session = credentials
+                    this.$store.dispatch('store_session', {session: credentials})
                     console.log(res);
                 }
             )
