@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="onSubmit">
     <div class="form-group">
-    <label for="inputName">Author name</label>
+    <label :for="disableAuthorField? 'inputDsblName':'inputName'">Author name</label>
     <input 
         type="text" 
         class="form-control" 
@@ -14,7 +14,7 @@
     <input 
         type="text" 
         class="form-control" 
-        id="inputName"
+        id="inputDsblName"
         :placeholder="authorQuote.author" 
         v-model="name"
         :disabled="true"

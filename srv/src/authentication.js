@@ -18,10 +18,32 @@ module.exports = function () {
   app.service('authentication').hooks({
     before: {
       create: [
-        authentication.hooks.authenticate(config.strategies)
+        authentication.hooks.authenticate(config.strategies),
+        // This hook adds userId attribute to the JWT payload
+        (hook) => {
+          if (!(hook.params.authenticated)) return;
+          
+          const user = hook.params.user;
+          hook.params.payload = hook.params.payload || {}
+          Object.assign(hook.params.payload, {
+            userId: user._id, 
+            iat: Date.now(),
+            exp: 3600, 
+            token_type: 'Bearer'
+          })
+        }
       ],
       remove: [
         authentication.hooks.authenticate('jwt')
+      ]
+    },
+    after: {
+      create: [
+        hook => {
+          delete hook.params.user.password
+          hook.result.user = hook.params.user;
+          hook.result.payload = hook.params.payload
+        }
       ]
     }
   });

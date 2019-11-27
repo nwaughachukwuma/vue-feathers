@@ -49,6 +49,9 @@ import CommentQuote from './CommentForm'
 import CommentItem from './CommentItem'
 import { isEmpty } from 'lodash'
 
+import clientAuth from '../auth'
+const authHeaders = clientAuth()
+
 export default {
     name: 'quote-comments',
     components: {CommentQuote, CommentItem},
@@ -80,7 +83,8 @@ export default {
             const result = await this.$feathers.service('comments').find({
                 query: {
                     quoteId,
-                }
+                },
+                headers: authHeaders
             });
             this.fetching = false;
             this.comments = result.data || [];
@@ -94,7 +98,8 @@ export default {
         this.$feathers.service('comments').find({
             query: {
                 quoteId,
-            }
+            },
+            headers: authHeaders
         })
         .then(res => this.comments = res.data)
     },

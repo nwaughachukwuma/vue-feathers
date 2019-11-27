@@ -5,6 +5,8 @@
 
         <quote-modal @created="fetchQuotes" />
 
+        <signup-form />
+
         <login-btn />
 
         <div class="panel panel-default">
@@ -29,11 +31,14 @@
 
 <script>
   import {groupBy, get, isEmpty} from 'lodash'
+  import clientAuth from './auth'
+  const authHeaders = clientAuth()
 
   import QuoteGroup from './components/QuoteGroup'
   import QuoteModal from './components/EdidableQuoteModal'
   import SearchQuote from './components/SearchQuote'
   import LoginBtn from './components/auth/login'
+  import SignupForm from './components/auth/signup'
 
   export default {
     data () {
@@ -42,13 +47,15 @@
         query: ''
       }
     },
-    components: { QuoteGroup, QuoteModal, SearchQuote, LoginBtn },
+    components: { QuoteGroup, QuoteModal, SearchQuote, LoginBtn, SignupForm },
     mounted () {
       this.fetchQuotes()
     },
     methods: {
       fetchQuotes () {
-        this.$feathers.service('quotes').find()
+        this.$feathers.service('quotes').find({
+            headers: authHeaders
+          })
           .then(result => {
             // get the grouped quotes
             const groupedEntry = groupBy(result.data, quote => quote.author)
@@ -67,8 +74,8 @@
                 { text: { $search: query } },
                 { author: { $search: query } }
               ],
-              // $search: query,
             },
+            headers: authHeaders
         }, {text: 1, author: 1})
           .then( result => {
             const res = get(result, 'data', undefined);
@@ -116,6 +123,9 @@
         removed(data) {
           console.log('removed listener data', data)
         }
+      },
+      authentication: {
+
       }
     }
   }

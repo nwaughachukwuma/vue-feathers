@@ -45,6 +45,8 @@ app.configure(rest());
 // Configure other middleware (see `middleware/index.js`)
 app.configure(middleware);
 app.configure(authentication);
+// Available options are listed in the "Options" section
+
 // Set up our services (see `services/index.js`)
 app.configure(services);
 // Configure a middleware for 404s and the error handler

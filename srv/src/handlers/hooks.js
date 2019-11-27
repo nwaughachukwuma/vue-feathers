@@ -1,6 +1,6 @@
 const {getUniqueLetters} = require('./helpers')
 
-module.exports = async (context, method = 'creat') => {
+module.exports = async (context, method = 'create') => {
     let hookMethod = method === 'create'? 'create': 'update';
 
     if (hookMethod === 'create') {
