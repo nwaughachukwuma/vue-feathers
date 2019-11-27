@@ -1,12 +1,38 @@
-const {getUniqueLetters} = require('./helpers')
+const {getUniqueLetters, difference} = require('./helpers')
+const {isEmpty, get, intersection} = require('lodash');
+
+const blockUpdateForLikesOnFields = ['author', 'text', 'userId', '_id']
 
 module.exports = async (context, method = 'create') => {
     let hookMethod = method === 'create'? 'create': 'update';
 
+    let diff = {}, dbQuote = {}
+    if (hookMethod === 'update') {
+      dbQuote = await context.app.service('quotes').get(context.id)
+      diff = difference(context.data, dbQuote);
+    }
+
+    let canUpdate = undefined;
+    canUpdate = intersection(
+      blockUpdateForLikesOnFields, Object.keys(diff)
+    );
+
+    // const user = context.params.user;
+    const userId = get(context.params, 'payload.userId', undefined);
+    if (!isEmpty(canUpdate) && !userId) {
+      throw new Error(`You are not permitted to ${hookMethod} a quote`)
+    }
+    
     if (hookMethod === 'create') {
       context.data.createdAt = Date.now();
+      context.data.userId = userId;
     } else {
+      // check that quote belongs to the authenticated user
+      if (!isEmpty(canUpdate) && dbQuote.userId !== userId) {
+        throw new Error(`Yout are not permitted to ${hookMethod} a quote`) 
+      }
       context.data.updatedAt = Date.now();
+      context.data.edited = true
     }
     
     const quoteText = context.data.text;

@@ -51,6 +51,8 @@
 
   import { debounce, throttle, isEmpty } from 'lodash'
   import LoopyButton from './LoopyButton'
+  import clientAuth from '../auth'
+  const authHeaders = clientAuth()
 
   export default {
     components: {LoopyButton},
@@ -71,7 +73,7 @@
         this.$feathers.service('quotes').create({
           author: this.name,
           text: this.quote
-        })
+        }, {headers: authHeaders})
           .then(() => {
             this.name = ''
             this.quote = ''
@@ -84,11 +86,9 @@
         if (isEmpty(this.quote)) return;
         this.typing = 'updating'
         this.$feathers.service('quotes').update(this.authorQuote._id, {
-          author: this.authorQuote.author,
-          text: this.quote,
-          edited: true,
-          updatedAt: Date.now()
-        })
+          ...this.authorQuote,
+          text: this.quote
+        }, {headers: authHeaders})
           .then((res) => {
             this.typing = 'updated'
             return this.$emit('updated')

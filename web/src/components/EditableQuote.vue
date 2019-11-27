@@ -54,7 +54,10 @@
           headers: authHeaders
         })
           .then(() => this.$emit('removed'))
-          .catch((err) => console.log('error removing quote: ', error))
+          .catch((err) => {
+            alert(err.message)
+            console.log('error removing quote: ', err)
+          })
       }
     },
     computed: {
