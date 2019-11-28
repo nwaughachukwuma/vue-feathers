@@ -12,7 +12,7 @@
         {{ authorQuote.updatedAt && dateUtil(authorQuote.updatedAt) }}
       </small>
       <span class="col-xs-7 col-sm-7 col-md-7 col-lg-12 pull-right actionButtons">
-        <button class="btn pull-right" @click="deleteQuote">
+        <button class="btn pull-right" @click="deleteQuote" v-show="authorQuote.userId === user._id">
           <i class="fa fa-trash deleteIcon"></i>
         </button>
 
@@ -55,8 +55,11 @@
       }
     },
     computed: {
-      activeQuery () {
+      activeQuery() {
         return this.$store.state.activeQuery
+      },
+      user() {
+        return this.$store.getters.user
       }
     }
   }
