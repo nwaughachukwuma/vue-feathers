@@ -43,18 +43,18 @@
     <small class="text-muted" v-if="typing==='updating'">
       <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
     </small>
-    <loopy-button />
+    <!-- <loopy-button /> -->
   </form>
 </template>
 
 <script>
 
   import { debounce, throttle, isEmpty } from 'lodash'
-  import LoopyButton from './LoopyButton'
+  // import LoopyButton from './LoopyButton'
   import clientAuth from '../auth'
 
   export default {
-    components: {LoopyButton},
+    components: {},
     props: {
       authorQuote: { type: Object, required: true },
       disableAuthorField: { type: Boolean, default: false}
