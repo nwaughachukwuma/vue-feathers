@@ -13,6 +13,9 @@ export const actions = {
     },
     store_session({commit}, payload) {
         commit('store_session', payload)
+    },
+    remove_session({commit}) {
+        commit('remove_session')
     }
 }
 

@@ -1,5 +1,7 @@
 <template>
-  <form @submit.prevent="createAccount" :key="'signUpForm'">
+  <div class="row">
+    <h2>Create Account</h2>
+    <form @submit.prevent="createAccount" :key="'signUpForm'">
     <div class="form-group">
         <label for="uName">Full name</label>
         <input 
@@ -33,39 +35,53 @@
         >
     </div>
     <button type="submit" class="btn btn-primary">
-      Create Account
+      SignUp
     </button>
   </form>
+
+    <p class="">
+        Already have an account?
+        <button class="btn btn-default" @click="switchAuth">
+            Login
+        </button>
+    </p>
+  </div>
 </template>
 
 <script>
+import { isEmpty } from "lodash";
 
-  import {isEmpty} from 'lodash'
-  
-  export default {
-    name: 'SignupForm',
-    data() {
-        return {
-            email: '',
-            password: '',
-            name: ''
-        }
+export default {
+  name: "SignupForm",
+  data() {
+    return {
+      email: "",
+      password: "",
+      name: ""
+    };
+  },
+  methods: {
+    createAccount() {
+      const { email, password, name } = this;
+      if (!email.length || !password.length || !name.length) {
+        alert("enter all fields");
+        return;
+      }
+      this.$feathers
+        .service("users")
+        .create({
+          name,
+          email,
+          password
+        })
+        .then(res => console.log("new user created", res))
+        .catch(err => alert(err.message));
     },
-    methods: {
-        createAccount() {
-            const {email, password, name} = this
-            if (!email.length||!password.length||!name.length) {
-                alert('enter all fields')
-                return;
-            }
-            this.$feathers.service('users').create({
-                name, email, password
-            })
-            .then(res => console.log('new user created', res))
-            .catch(err => alert(err.message))
-        }
-    },
+    switchAuth() {
+      this.$emit("switchAuth", { type: "signup" });
+    }
   }
+};
 </script>
 
 <style lang="scss" scoped>

@@ -50,7 +50,6 @@ import CommentItem from './CommentItem'
 import { isEmpty } from 'lodash'
 
 import clientAuth from '../auth'
-const authHeaders = clientAuth()
 
 export default {
     name: 'quote-comments',
@@ -84,7 +83,7 @@ export default {
                 query: {
                     quoteId,
                 },
-                headers: authHeaders
+                headers: clientAuth()
             });
             this.fetching = false;
             this.comments = result.data || [];
@@ -99,7 +98,7 @@ export default {
             query: {
                 quoteId,
             },
-            headers: authHeaders
+            headers: clientAuth(),
         })
         .then(res => this.comments = res.data)
     },

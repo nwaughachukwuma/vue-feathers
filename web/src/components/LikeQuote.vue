@@ -8,7 +8,6 @@
 <script>
   import {debounce, get} from 'lodash'
   import clientAuth from '../auth'
-  const authHeaders = clientAuth()
 
   export default {
     props: {
@@ -40,7 +39,7 @@
           userId: this.user._id,
           quoteId: this.authorQuote._id,
           status: true,
-        }, {headers: authHeaders})
+        }, {headers: clientAuth()})
           .then((res) => {
             this.fetchQuoteLikes();
             return this.$emit('liked')
@@ -62,7 +61,7 @@
         await this.$feathers.service('likes').update(this.theLikedQuote._id, {
           ...this.theLikedQuote,
           status: likeStatus,
-        }, {headers: authHeaders})
+        }, {headers: clientAuth()})
           .then((res) => {
             this.fetchQuoteLikes();
             return this.$emit('liked')
@@ -82,7 +81,7 @@
             quoteId: {$search: this.authorQuote._id},
             // userId: {$search: this.user._id}
           },
-          headers: authHeaders
+          headers: clientAuth()
         })
         .then(res => {
           this.likeCount = res.data.filter(el=>!!el.status).length;

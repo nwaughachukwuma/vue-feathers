@@ -33,7 +33,6 @@
   import { debounce, throttle, isEmpty } from 'lodash'
   import v4 from 'uuid/v4'
   import clientAuth from '../auth'
-  const authHeaders = clientAuth()
 
   export default {
     props: {
@@ -59,7 +58,7 @@
           author: this.user.name,
           text: this.comment,
           userId: this.user._id
-        }, {headers: authHeaders})
+        }, {headers: clientAuth()})
           .then( res => {
             this.name = ''
             this.comment = ''

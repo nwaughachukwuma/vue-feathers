@@ -17,6 +17,11 @@ export const mutations = {
         state.session = session
         // save to local storage
         window.localStorage.session = JSON.stringify(session);
+    },
+    remove_session(state) {
+        state.session = undefined
+        // remove from local storage
+        window.localStorage.removeItem('session')
     }
 }
 

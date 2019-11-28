@@ -16,8 +16,8 @@ export default () => {
   const app = feathers();
   app
     .configure(hooks({
-      populateHeader: {Authorization: `Bearer ${ls.session.accessToken}`},
-      authentication: [async context => console.log('client context ....>>>>>', context)],
+      // populateHeader: {Authorization: `Bearer ${ls.session.accessToken}`},
+      // authentication: [async context => console.log('client context ....>>>>>', context)],
       before: {
         all: [async context => {
           console.log('brower context before ===>', context)

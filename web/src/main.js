@@ -21,10 +21,12 @@ Vue.filter('highlight', function(word, query){
 Vue.use(Vuex)
 Vue.use(VueFeathers, feathersClient())
 
+document.addEventListener('storage', console.log('storage updated'));
+
 // const store = new Vuex.Store({ })
 
 // eslint-disable-next-line no-new
-new Vue({
+var vm = new Vue({
   el: '#root',
   store,
   render: h => h(Entry)

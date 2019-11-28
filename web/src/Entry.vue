@@ -1,13 +1,16 @@
 <template>
   <div class="container">
-    <div class="row">
+
+    <div class="row" v-if="!userAuth">
+      <div class="col-xs-6 col-md-6 col-xs-offset-3 col-md-offset-3">
+        <auth-logic />
+      </div>
+    </div>
+
+    <div class="row" v-else>
       <div class="col-md-6 col-md-offset-3">
 
         <quote-modal @created="fetchQuotes" />
-
-        <signup-form />
-
-        <login-btn />
 
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -24,6 +27,9 @@
             />
           </div>
         </div>
+        <button class="btn btn-danger">
+          Logout
+        </button>
       </div>
     </div>
   </div>
@@ -32,32 +38,39 @@
 <script>
   import {groupBy, get, isEmpty} from 'lodash'
   import clientAuth from './auth'
-  const authHeaders = clientAuth()
 
   import QuoteGroup from './components/QuoteGroup'
   import QuoteModal from './components/EdidableQuoteModal'
   import SearchQuote from './components/SearchQuote'
-  import LoginBtn from './components/auth/login'
-  import SignupForm from './components/auth/signup'
+  import AuthLogic from './components/auth'
 
   export default {
     data () {
       return {
         groupedQuotes: {},
-        query: ''
+        query: '',
+        userAuth: false,
       }
     },
-    components: { QuoteGroup, QuoteModal, SearchQuote, LoginBtn, SignupForm },
+    components: { QuoteGroup, QuoteModal, SearchQuote, AuthLogic },
     mounted () {
+      this.headers; // needed to rehydrate session on the store
+      const session = this.$store.state.session;
+      if (isEmpty(session)) {
+        return
+      }
+      this.userAuth = true;
       this.fetchQuotes()
-      
-      const session = JSON.parse(window.localStorage.session)
-      this.$store.dispatch('store_session', {session});
+    },
+    computed: {
+      headers() {
+        return this.$store.getters.headers;
+      }
     },
     methods: {
       fetchQuotes () {
         this.$feathers.service('quotes').find({
-            headers: authHeaders
+            headers: clientAuth()
           })
           .then(result => {
             // get the grouped quotes
@@ -77,14 +90,13 @@
                 { author: { $search: query } }
               ],
             },
-            headers: authHeaders
+            headers: clientAuth()
         }, {text: 1, author: 1})
           .then( result => {
             const res = get(result, 'data', undefined);
             if (isEmpty(res)) {
               throw new Error('No result found')
             }
-            console.log(':=>>', res)
             const filteredRes = res.filter(
               el => {
                 const concat = [el.author, el.text].join("").toLowerCase();
@@ -103,8 +115,8 @@
           })
       }
     },
-    feathers: { // here is our section
-      quotes: { // here is the subsection for the 'messages' service
+    feathers: { // section for listening to feathers services
+      quotes: {
         created(data) {
           console.log('created listener data', data)
         },
@@ -115,7 +127,7 @@
           console.log('removed listener data', data)
         }
       },
-      comments: { // here is the subsection for the 'messages' service
+      comments: { 
         created(data) {
           console.log('created listener data', data)
         },
@@ -127,7 +139,22 @@
         }
       },
       authentication: {
-
+        async created(data) {
+          console.log('authentication listener created', data)
+          if (!!data.accessToken) {
+            await this.$store.dispatch('store_session', {session: data})
+            this.userAuth = true
+            this.fetchQuotes();
+          }
+        },
+        updated(data) {
+          console.log('authentication listener updated', data)
+          this.$store.dispatch('store_session', {session: data})
+        },
+        removed(data) {
+          console.log('authentication listener deleted', data)
+          this.$store.dispatch('remove_session')
+        }
       }
     }
   }
