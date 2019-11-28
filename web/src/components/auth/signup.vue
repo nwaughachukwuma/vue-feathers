@@ -74,7 +74,10 @@ export default {
           email,
           password
         })
-        .then(res => console.log("new user created", res))
+        .then(res => {
+            const gotoLogin = confirm('New account created. Go to Login?')
+            if (gotoLogin) this.switchAuth()
+        })
         .catch(err => alert(err.message));
     },
     switchAuth() {

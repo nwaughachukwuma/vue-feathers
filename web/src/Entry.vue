@@ -27,9 +27,7 @@
             />
           </div>
         </div>
-        <button class="btn btn-danger">
-          Logout
-        </button>
+        <logout-btn @logout="logout" />
       </div>
     </div>
   </div>
@@ -43,6 +41,7 @@
   import QuoteModal from './components/EdidableQuoteModal'
   import SearchQuote from './components/SearchQuote'
   import AuthLogic from './components/auth'
+  import LogoutBtn from './components/auth/logoutBtn'
 
   export default {
     data () {
@@ -52,7 +51,7 @@
         userAuth: false,
       }
     },
-    components: { QuoteGroup, QuoteModal, SearchQuote, AuthLogic },
+    components: { QuoteGroup, QuoteModal, SearchQuote, AuthLogic, LogoutBtn },
     mounted () {
       this.headers; // needed to rehydrate session on the store
       const session = this.$store.state.session;
@@ -113,6 +112,9 @@
             this.$store.dispatch('store_query', {query});
             return this.query = query
           })
+      },
+      logout() {
+        this.userAuth = false;
       }
     },
     feathers: { // section for listening to feathers services

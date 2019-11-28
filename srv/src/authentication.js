@@ -33,7 +33,8 @@ module.exports = function () {
         }
       ],
       remove: [
-        authentication.hooks.authenticate('jwt')
+        async context => console.log('context before remove', context.params),
+        authentication.hooks.authenticate(['jwt', 'local'])
       ]
     },
     after: {

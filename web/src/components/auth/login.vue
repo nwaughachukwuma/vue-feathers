@@ -58,13 +58,7 @@ export default {
             })
             .then(
                 res => {
-                    let credentials = {
-                        ...res,
-                        user: {...res.user}, 
-                        accessToken: res.accessToken,
-                    };
-                    this.$store.dispatch('store_session', {session: credentials})
-                    console.log(res);
+                    this.$emit('login')
                 }
             )
             .catch(
