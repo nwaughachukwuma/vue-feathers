@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="row">
-            <img class="img-responsive" :src="imgSrc" alt="Quote Bg" width="480">
+            <img class="img-responsive" :src="imgSrc" alt="Quote Bg">
         </div>
         <login-btn v-if="authType==='login'" @switchAuth="switchAuthType" />
         <signup-form v-else @switchAuth="switchAuthType"/>
