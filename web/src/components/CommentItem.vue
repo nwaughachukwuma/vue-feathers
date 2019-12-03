@@ -1,5 +1,5 @@
 <template>
-    <p class="list-group-item">
+    <p>
         <i class="fa fa-comment"></i>
         <small>
             {{ comment.text }} - {{comment.author}}

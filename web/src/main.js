@@ -26,7 +26,7 @@ document.addEventListener('storage', console.log('storage updated'));
 // const store = new Vuex.Store({ })
 
 // eslint-disable-next-line no-new
-var vm = new Vue({
+new Vue({
   el: '#root',
   store,
   render: h => h(Entry)

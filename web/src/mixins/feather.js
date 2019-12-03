@@ -1,5 +1,5 @@
 // define a mixin object
-const FeathersMixin = {
+const FeathersJSMixin = {
     feathers: { // section for listening to feathers services
         quotes: {
             created(data) {
@@ -44,4 +44,4 @@ const FeathersMixin = {
     }
 }
 
-export default FeathersMixin
+export default FeathersJSMixin

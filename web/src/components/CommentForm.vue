@@ -14,6 +14,7 @@
                             placeholder="Write..." 
                             v-model="comment"
                             required
+                            v-focus="{isActiveQuote: activeQuoteId === authorQuote._id}"
                         >
                     </div>
                     <button type="button" @click.stop.prevent="onSubmit" class="btn btn-primary">
@@ -33,8 +34,10 @@
   import { debounce, throttle, isEmpty } from 'lodash'
   import v4 from 'uuid/v4'
   import clientAuth from '../auth'
+  import { localDirectives } from '../mixins/localDirectives'
 
   export default {
+    mixins: [localDirectives],
     props: {
       authorQuote: { type: Object, required: true },
     }, 

@@ -43,10 +43,10 @@
   import AuthLogic from './components/auth'
   import LogoutBtn from './components/auth/logoutBtn'
 
-  import FeathersMixin from './mixins/feather'
+  import FeathersJSMixin from './mixins/feather'
 
   export default {
-    mixins: [FeathersMixin],
+    mixins: [FeathersJSMixin],
     data () {
       return {
         groupedQuotes: {},

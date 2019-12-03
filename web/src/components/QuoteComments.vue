@@ -25,9 +25,18 @@
                         <span v-if="fetching">
                             <i class="fa fa-spinner fa-spin"></i>
                         </span>
-                        <ul v-else class="list-group" v-for="(comment, index) in comments" :key="index">
-                            <comment-item :comment="comment" />
-                        </ul>
+                        <transition-group 
+                            name="list-group-transition" 
+                            v-else 
+                            class="list-group" 
+                            tag="ul"
+                        >
+                        <!-- <ul v-else class="list-group"> -->
+                            <li class="list-group-item" v-for="(comment, index) in comments" :key="veeFor(comment, index)">
+                                <comment-item :comment="comment" />
+                            </li>
+                        <!-- </ul> -->
+                        </transition-group>
                         <comment-quote 
                             :authorQuote="authorQuote" 
                             @created="hideModal"
@@ -50,6 +59,7 @@ import CommentItem from './CommentItem'
 import { isEmpty } from 'lodash'
 
 import clientAuth from '../auth'
+import v4 from 'uuid/v4'
 
 export default {
     name: 'quote-comments',
@@ -65,6 +75,9 @@ export default {
       }
     },
     methods: {
+        veeFor(comment, index) {
+            return v4(); //.toString() + comment.length;
+        },
         isEmpty,
         async showModal(e) {
             $('#qCM'+this.authorQuote._id).modal('toggle');
@@ -117,5 +130,18 @@ export default {
 .commentIcon {
   font-size:18px;
   color:rgb(85, 193, 226)
+}
+
+.list-group-item {
+  transition: all 1s;
+}
+
+.list-group-transition-enter, .list-group-transition-leave-to
+/* .list-group-transition-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  transform: translateY(30px);
+}
+.list-group-transition-leave-active {
+  position: absolute;
 }
 </style>
