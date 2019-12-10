@@ -4,12 +4,18 @@ import hooks from 'feathers-hooks';
 import auth from 'feathers-authentication-client'
 import $ from 'jquery'
 
+// import io from 'socket.io-client'; // /dist/socket.io
+// import socketio from 'feathers-socketio/client';
+
 export default () => {
+  // configure with socket io
+  // const socket = io('/socket.io', { timeout: 4900, transports: ['websocket']}); // http://path/to/api
   const restClient = rest('/rest.api')
 
   // see the options here: 
   // https://docs.feathersjs.com/api/authentication/client.html#configuration 
-  const ls = window.localStorage;
+  // const ls = window.localStorage;
+
   const options = {storageKey: 'feathers-app'}
   const authClient = auth(options);
 
@@ -24,6 +30,7 @@ export default () => {
         }]
       }
     }))
+    // .configure(socketio(socket))
     .configure(restClient.jquery($))
     .configure(authClient)
 

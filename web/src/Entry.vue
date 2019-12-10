@@ -79,8 +79,8 @@
             const groupedEntry = groupBy(result.data, quote => quote.author)
             this.groupedQuotes = groupedEntry;
           })
-          .catch(() => {
-            console.log('An error occurred while retreiving quotes.')
+          .catch((err) => {
+            console.log('An error occurred while retreiving quotes.', err)
           })
       },
       searchQuotes({query}) {

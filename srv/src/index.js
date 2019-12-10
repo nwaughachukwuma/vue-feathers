@@ -4,6 +4,8 @@ const app = require('./app');
 const port = app.get('port');
 const server = app.listen(port);
 
+console.log('==socket.io==', app.io)
+
 process.on('unhandledRejection', (reason, p) =>
   logger.error('Unhandled Rejection at: Promise ', p, reason)
 );
