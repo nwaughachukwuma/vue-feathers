@@ -23,6 +23,17 @@ const FeathersJSMixin = {
                 console.log('removed listener data', data)
             }
         },
+        likes: {
+            created(data) {
+                console.log('created listener data: likes::', data)
+            },
+            updated(data) {
+                console.log('updated listener data: likes::', data)
+            },
+            removed(data) {
+                console.log('removed listener data: likes::', data)
+            }
+        },
         authentication: {
             async created(data) {
                 console.log('authentication listener created', data)

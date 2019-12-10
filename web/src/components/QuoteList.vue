@@ -44,7 +44,6 @@
 .list-group-item {
   transition: all 1s;
 }
-
 .list-group-transition-enter, .list-group-transition-leave-to
 /* .list-group-transition-leave-active below version 2.1.8 */ {
   opacity: 0;

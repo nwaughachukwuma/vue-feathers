@@ -89,4 +89,7 @@
 </script>
 
 <style lang="scss" scoped>
+.list-group-item {
+  transition: all 1s;
+}
 </style>
