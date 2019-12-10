@@ -5,6 +5,7 @@
       <label v-html="$options.filters.highlight(authorQuote.text, activeQuery)">
         {{ authorQuote.text }}
       </label>
+      <!-- <small>{{ authorQuote.text | capitalize(activeQuery) }}</small> -->
     </p>
     <div class="row">
       <small class="text-primary col-xs-5 col-sm-5 col-md-5 col-lg-12" v-if="authorQuote.edited"> 
@@ -60,6 +61,17 @@
       },
       user() {
         return this.$store.getters.user
+      }
+    },
+    filters: {
+      capitalize: (text, query) => {
+        return text.toUpperCase();
+      },
+      hiLight: (text, query) => {
+        var check = new RegExp(query, "ig");
+        return text.toString().replace(check, function(matchedText, a, b){
+            return ('<span class=\'text-danger highlight\'>' + matchedText + '</span>');
+        });
       }
     }
   }
