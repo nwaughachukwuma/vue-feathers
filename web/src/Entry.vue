@@ -55,7 +55,11 @@
       }
     },
     components: { QuoteGroup, QuoteModal, SearchQuote, AuthLogic, LogoutBtn },
-    mounted () {
+    async mounted () {
+      // Returns the authenticated user and accessToken
+      const userAuth = await this.$feathers.authentication
+      console.log('userAuth', userAuth)
+      
       this.headers; // needed to rehydrate session on the store
       const session = this.$store.state.session;
       if (isEmpty(session)) {

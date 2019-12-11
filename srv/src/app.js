@@ -9,8 +9,6 @@ const feathers = require('feathers');
 const configuration = require('feathers-configuration');
 const hooks = require('feathers-hooks');
 const rest = require('feathers-rest');
-// const socketio = require('feathers-socketio')
-
 
 const handler = require('feathers-errors/handler');
 const notFound = require('feathers-errors/not-found');
@@ -41,26 +39,6 @@ app.use('/', feathers.static(app.get('public')));
 app.configure(hooks());
 app.configure(mongodb);
 app.configure(rest());
-// app.configure(socketio(function(io) {
-//     console.log('on callback')
-//     io.on('connection', function(socket) {
-//       socket.emit('news', { text: 'A client connected!' });
-//       socket.on('quotes', function (data) {
-//         console.log(data);
-
-//         console.log('on listener')
-//       });
-//     });
-    
-//     // Registering Socket.io middleware
-//     io.use(function (socket, next) {
-
-//       console.log('on use')
-//       // Exposing a request property to services and hooks
-//       socket.feathers.referrer = socket.request.referrer;
-//       next();
-//     });
-//   }));
 
 
 // Configure other middleware (see `middleware/index.js`)

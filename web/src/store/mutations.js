@@ -22,6 +22,7 @@ export const mutations = {
         state.session = undefined
         // remove from local storage
         window.localStorage.removeItem('session')
+        window.localStorage.removeItem('feathers-jwt')
     },
     store_todos(state, {todos}) {
         state.todos = todos;

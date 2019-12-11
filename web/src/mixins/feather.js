@@ -49,7 +49,7 @@ const FeathersJSMixin = {
             },
             removed(data) {
                 console.log('authentication listener deleted', data)
-                this.$store.dispatch('remove_session')
+                this.$store.dispatch('remove_session');
             }
         }
     }

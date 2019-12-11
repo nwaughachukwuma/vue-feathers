@@ -14,7 +14,10 @@ export const getters = {
     headers: state => {
         let cred = JSON.parse(window.localStorage.session || "{}");
         if (isEmpty(cred)) {
-            cred = get(state, 'session', {})
+            // get access token from auth-storageKey
+            const jwt = get(window.localStorage, 'feathers-jwt', '');
+            const sessionState = jwt? {accessToken: jwt}: {}
+            cred = get(state, 'session', sessionState)
         }
         state.session = cred;
         return {

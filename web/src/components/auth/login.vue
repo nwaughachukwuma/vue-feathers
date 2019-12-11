@@ -50,12 +50,18 @@ export default {
     methods: {
         login() {
             if (!this.email.length || !this.password.length) return
-            this.$feathers.service('authentication')
-            .create({
-                strategy: "local",
+
+            this.$feathers.authenticate({
+                strategy: 'local',
                 email: this.email,
                 password: this.password
             })
+            // this.$feathers.service('authentication')
+            // .create({
+            //     strategy: "local",
+            //     email: this.email,
+            //     password: this.password
+            // })
             .then(
                 res => {
                     this.$emit('login')
