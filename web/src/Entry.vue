@@ -44,9 +44,10 @@
   import LogoutBtn from './components/auth/logoutBtn'
 
   import FeathersJSMixin from './mixins/feather'
+  import SocketioMixin from './mixins/socketio'
 
   export default {
-    mixins: [FeathersJSMixin],
+    mixins: [FeathersJSMixin, SocketioMixin],
     data () {
       return {
         groupedQuotes: {},
@@ -55,10 +56,7 @@
       }
     },
     components: { QuoteGroup, QuoteModal, SearchQuote, AuthLogic, LogoutBtn },
-    async mounted () {
-      // Returns the authenticated user and accessToken
-      const userAuth = await this.$feathers.authentication
-      console.log('userAuth', userAuth)
+    mounted () {
       
       this.headers; // needed to rehydrate session on the store
       const session = this.$store.state.session;
@@ -76,6 +74,10 @@
     methods: {
       fetchQuotes () {
         this.$feathers.service('quotes').find({
+            paginate: {
+              default: 20,
+              max: 100
+            },
             headers: clientAuth()
           })
           .then(result => {

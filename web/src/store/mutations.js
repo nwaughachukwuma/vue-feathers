@@ -1,3 +1,5 @@
+import { get } from 'lodash'
+
 export const mutations = {
     store_quoteId(state, {viewMode, quoteId}) {
         state.activeQuoteId = quoteId
@@ -17,6 +19,7 @@ export const mutations = {
         state.session = session
         // save to local storage
         window.localStorage.session = JSON.stringify(session);
+        // window.localStorage['feathers-jwt'] = get(session, 'accessToken', '')
     },
     remove_session(state) {
         state.session = undefined

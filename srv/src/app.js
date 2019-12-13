@@ -9,6 +9,7 @@ const feathers = require('feathers');
 const configuration = require('feathers-configuration');
 const hooks = require('feathers-hooks');
 const rest = require('feathers-rest');
+const socketio = require('feathers-socketio');
 
 const handler = require('feathers-errors/handler');
 const notFound = require('feathers-errors/not-found');
@@ -39,6 +40,29 @@ app.use('/', feathers.static(app.get('public')));
 app.configure(hooks());
 app.configure(mongodb);
 app.configure(rest());
+app.configure(socketio({
+    transports: ['websocket', 'polling']
+}, function (io) {
+    io.on('connection', function (socket) {
+        // on reconnection, reset the transports option, as the Websocket
+        // connection may have failed (caused by proxy, firewall, browser, ...)
+        socket.on('reconnect_attempt', () => {
+            console.log('reconnect attempt is on')
+            socket.io.opts.transports = ['websocket', 'polling'];
+        });
+        socket.emit('connect_message', { text: 'new client connected!' }); // emit an event to the socket
+        io.emit('broadcast', {text: 'broadcast to all the channels'}); // emit an event to all connected sockets
+    });
+
+    // Registering Socket.io middleware
+    io.use(function (socket, next) {
+        // Exposing a request property to services and hooks
+        socket.feathers.referrer = socket.request.referrer;
+        socket.feathers.provider = 'socketio'
+        console.log('socket middleware registered Ok', Date.now());
+        next();
+    });
+}));
 
 
 // Configure other middleware (see `middleware/index.js`)

@@ -32,6 +32,14 @@ const FeathersJSMixin = {
             },
             removed(data) {
                 console.log('removed listener data: likes::', data)
+            }, 
+            likes_updated(data) {
+                console.log('likes updated data is :::', data)
+            }
+        },
+        users: {
+            find(data) {
+                console.log('find users listener: users::', data)
             }
         },
         authentication: {

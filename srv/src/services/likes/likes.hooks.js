@@ -1,6 +1,7 @@
 const search = require('feathers-mongodb-fuzzy-search')
 
 module.exports = {
+
   before: {
     all: [
       search({
@@ -60,8 +61,19 @@ module.exports = {
       data.likeCount = data.likeCount++ || 1
       
       await context.app.service('quotes').update(quoteId, data);
+
+      // emit an event using app.io
+      context.app.service.emit('likes', 'created', {quoteId, data});
+      // app.io.emit('authentication', Object.assign({}, hook.result));
     }],
-    update: [],
+    update: [async context => {
+
+      const {data: {quoteId}} = context;
+      const quote = await context.app.service('quotes').get(quoteId);
+      const data = Object.assign({}, quote); 
+      // emit an event using app.io
+      context.app.io.emit('likes_updated', Object.assign({}, {quoteId, data}));
+    }],
     patch: [],
     remove: []
   },

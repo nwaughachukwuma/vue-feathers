@@ -7,7 +7,7 @@ module.exports = function () {
   const app = this;
   const paginate = app.get('paginate');
   const mongoClient = app.get('mongoClient');
-  const options = { paginate };
+  const options = { paginate: Object.assign({}, paginate, {default: 20, max: 100}) };
 
   // Initialize our service with any options it requires
   app.use('/quotes', createService(options));

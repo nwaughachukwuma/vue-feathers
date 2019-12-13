@@ -11,6 +11,11 @@ const { iffElse } = require('feathers-hooks-common');
 // const token = bearer_token.split(' ').pop()
 // const userAuth = decode(token);  = {userId, aud, iat, exp, ...}
 
+/**
+ * 
+ * @param {object} noAuthPaths services that do not require authentication or user token.
+ * @returns {boolean}
+ */
 const serviceType = noAuthPaths => (hook) => noAuthPaths.includes(hook.path)
 
 module.exports = {

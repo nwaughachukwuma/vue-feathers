@@ -8,7 +8,6 @@ export const getters = {
         return state.session
     },
     user: state => {
-        console.log('getters', state.session);
         return get(state.session, 'user', undefined)
     },
     headers: state => {

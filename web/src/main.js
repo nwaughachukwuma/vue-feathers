@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueFeathers from 'vue-feathers'
+import socketio from 'socket.io-client';
+import VueSocketIO from 'vue-socket.io';
+import { get } from 'lodash'
 
 import store from './store'
 import feathersClient from './feathers'
@@ -18,10 +21,29 @@ Vue.filter('highlight', function(word, query){
   });
 });
 
+// const SocketInstance = socketio('http://localhost:8380');
+
+// configure vue-socket.io
+const ls = window.localStorage;
+const SocketInstance = socketio('http://localhost:8380', {
+  transports: ['websocket' , 'polling'], 
+  forceNew: true,
+  extraHeaders: {
+    Authorization: `Bearer ${get(ls, 'feathers-jwt', '')}`
+  },
+  query: {
+    token: ls.getItem('feathers-jwt')
+  }
+});
+
+Vue.use(new VueSocketIO({
+  debug: true,
+  connection: SocketInstance,
+  vuex: store
+}));
+
 Vue.use(Vuex)
 Vue.use(VueFeathers, feathersClient())
-
-document.addEventListener('storage', console.log('storage updated'));
 
 // const store = new Vuex.Store({ })
 

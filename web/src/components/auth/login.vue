@@ -47,6 +47,11 @@ export default {
             password: ''
         }
     },
+    mounted() {
+        // this.$feathers.service('authentication').on('created', function(data) {
+        //     console.log('listening for created authentication with feathers', data)
+        // })
+    },
     methods: {
         login() {
             if (!this.email.length || !this.password.length) return
@@ -77,6 +82,26 @@ export default {
         },
         switchAuth() {
             this.$emit('switchAuth', {type: 'login'})
+        }
+    },
+    feathers: {
+        authentication: {
+            async created(data) {
+                console.log('authentication listener created', data)
+                if (!!data.accessToken) {
+                    await this.$store.dispatch('store_session', { session: data })
+                    this.userAuth = true
+                    this.fetchQuotes();
+                }
+            },
+            updated(data) {
+                console.log('authentication listener updated', data)
+                this.$store.dispatch('store_session', { session: data })
+            },
+            removed(data) {
+                console.log('authentication listener deleted', data)
+                this.$store.dispatch('remove_session');
+            }
         }
     }
 }

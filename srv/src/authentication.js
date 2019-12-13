@@ -44,6 +44,9 @@ module.exports = function () {
           hook.result.user = hook.params.user;
           hook.result.lastLogin = Date.now();
           hook.result.payload = hook.params.payload
+
+          // emit an event using app.io
+          // app.io.emit('authentication', Object.assign({}, hook.result));
         }
       ]
     }
