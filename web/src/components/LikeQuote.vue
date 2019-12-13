@@ -117,6 +117,17 @@
         },
         immediate: false
       }
+    },
+    sockets: {
+      likes_updated(data) {
+
+        if (data.quoteId !== this.authorQuote._id) return
+        if (this.user._id !== data.userId) {
+            // reload the quotes
+            this.fetchQuoteLikes()
+        }
+        // console.log('likes updated data is :::', data)
+      },
     }
   }
 </script>

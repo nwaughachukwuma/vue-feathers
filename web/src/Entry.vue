@@ -14,7 +14,7 @@
 
         <div class="panel panel-default">
           <div class="panel-heading">
-            Existing Quotes
+            Welcome, {{user.name}}
           </div>
 
           <div class="panel-body">
@@ -72,6 +72,9 @@
       }
     },
     methods: {
+      hello: function () {
+          console.log('hello from mixin!')
+        },
       fetchQuotes () {
         this.$feathers.service('quotes').find({
             paginate: {
