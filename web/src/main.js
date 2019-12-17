@@ -37,7 +37,7 @@ const SocketInstance = socketio('http://localhost:8380', {
 });
 
 Vue.use(new VueSocketIO({
-  debug: true,
+  debug: false,
   connection: SocketInstance,
   vuex: store
 }));
