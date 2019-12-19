@@ -1,7 +1,7 @@
 FROM node
 
 RUN apt-get update \
-    && apt-get install -y nginx mongodb supervisor openssh-server markdown
+    && apt-get install -y nginx mongodb supervisor openssh-server markdown redis-server
 
 RUN mkdir /var/run/sshd
 

@@ -126,7 +126,16 @@
             // reload the quotes
             this.fetchQuoteLikes()
         }
-        // console.log('likes updated data is :::', data)
+        console.log('likes updated data is broadcasted :::', data)
+      },
+      likes_created(data) {
+
+        if (data.quoteId !== this.authorQuote._id) return
+        if (this.user._id !== data.userId) {
+            // reload the quotes
+            this.fetchQuoteLikes()
+        }
+        console.log('likes created data is broadcasted :::', data)
       },
     }
   }

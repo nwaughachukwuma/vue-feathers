@@ -9,7 +9,7 @@ import actions from './actions'
 import getters from './getters'
 import mutations from './mutations'
 
-const logger = () => process.env.NODE_ENV === 'production'? () => {} : createLogger({collapsed: false})
+const logger = () => process.env.NODE_ENV === 'production'? () => {} : createLogger({collapsed: true})
 const plugin1 = store => {
     // called when the store is initialized
     store.subscribe((mutation, state) => {

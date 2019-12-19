@@ -22,6 +22,8 @@ const mongodb = require('./mongodb');
 
 const authentication = require('./authentication');
 
+const rateLimiting = require('./middleware/rate_limiting')
+
 const app = feathers();
 
 // Load app configuration
@@ -32,6 +34,8 @@ app.use(helmet());
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+// add rate limting here
+app.use(rateLimiting());
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 // Host the public folder
 app.use('/', feathers.static(app.get('public')));

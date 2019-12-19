@@ -63,8 +63,7 @@ module.exports = {
       await context.app.service('quotes').update(quoteId, data);
 
       // emit an event using app.io
-      context.app.service.emit('likes', 'created', {userId, quoteId, data});
-      // app.io.emit('authentication', Object.assign({}, hook.result));
+      context.app.io.emit('likes_created', Object.assign({}, {userId, quoteId, data}));
     }],
     update: [async context => {
 
