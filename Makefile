@@ -8,21 +8,21 @@ MIN_DOCKER_SERVER_VERSION = 17.03
 all: prerequisites build run
 
 build:
-	docker build -t ebot7-recruit .
+	docker build -t vue-feathers .
 
 run:
-	docker run -d --restart=always --name=ebot7-recruit \
+	docker run -d --restart=always --name=vue-feathers \
 		-p 8380:80 \
 		-v $(CURDIR)/srv/src:/app/srv/src \
 		-v $(CURDIR)/web/src:/app/web/src \
-		ebot7-recruit
+		vue-feathers
 
 clean:
 	@echo -n "Are you sure [yN]? " \
 		&& read ans && [ $$ans == y ]
-	docker stop ebot7-recruit
-	docker rm ebot7-recruit
-	docker rmi ebot7-recruit
+	docker stop vue-feathers
+	docker rm vue-feathers
+	docker rmi vue-feathers
 
 # Check docker version
 prerequisites:
