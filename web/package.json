@@ -1,4 +1,11 @@
 {
+  "scripts": {
+    "name": "sharp-quotes",
+    "author": "cpnwaugha",
+    "version": "0.0.1",
+    "start": "babel-node build/dev-server.js",
+    "dev": "babel-node build/dev-client.js"
+  },
   "dependencies": {
     "autoprefixer": "^7.1.6",
     "babel-core": "^6.26.0",
